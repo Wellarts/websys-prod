@@ -2,3 +2,22 @@ composer create-project laravel/laravel
 
 composer require filament/filament
 
+php artisan migrate
+
+php artisan make:filament-user
+
+php artisan vendor:publish --tag=filament-config
+
+php artisan vendor:publish --tag=filament-translations
+
+php artisan vendor:publish --tag=filament-forms-translations
+php artisan vendor:publish --tag=filament-tables-translations
+php artisan vendor:publish --tag=filament-support-translations
+
+Alterar para 'locale' => 'pt_BR', no config/app.php
+
+
+composer require doctrine/dbal --dev
+
+
+
