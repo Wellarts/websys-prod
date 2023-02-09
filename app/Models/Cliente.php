@@ -12,6 +12,7 @@ class Cliente extends Model
     protected $fillable = [
        
             'nome',
+            'cpf_cnpj',
             'endereco',
             'estado_id',
             'cidade_id',
@@ -19,4 +20,14 @@ class Cliente extends Model
             'email',
             
     ];
+
+    public function Estado()
+    {
+        return $this->belongsTo(Estado::class);
+    }
+
+    public function Cidade()
+    {
+        return $this->belongsTo(Cidade::class);
+    }
 }

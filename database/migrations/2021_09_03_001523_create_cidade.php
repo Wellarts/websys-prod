@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration
+class CreateCidade extends Migration
 {
     /**
      * Run the migrations.
@@ -13,16 +13,12 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('clientes', function (Blueprint $table) {
+        Schema::create('cidade', function (Blueprint $table) {
             $table->id();
+            $table->integer('codigo_uf');
+            $table->integer('codigo_municipio');
             $table->string('nome');
-            $table->string('cpf_cnpj');
-            $table->longText('endereco');
-            $table->foreignId('estado_id');
-            $table->foreignId('cidade_id');
-            $table->string('telefone');
-            $table->string('email');
-            $table->timestamps();
+            $table->foreign('codigo_uf')->references('codigo_uf')->on('estado');
         });
     }
 
@@ -33,6 +29,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('clientes');
+        Schema::dropIfExists('cidade');
     }
-};
+}
