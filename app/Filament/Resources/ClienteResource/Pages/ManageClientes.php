@@ -13,7 +13,8 @@ class ManageClientes extends ManageRecords
     protected function getActions(): array
     {
         return [
-            Actions\CreateAction::make(),
+            Actions\CreateAction::make()
+            ->label('Novo'),
         ];
     }
 }
