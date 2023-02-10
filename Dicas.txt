@@ -20,6 +20,8 @@ composer require doctrine/dbal --dev
 
 php artisan make:model -m NomeModel
 
+php artisan make:filament-resource Fornecedor --gerenate --simple
+
 composer require codeat3/blade-fluentui-system-icons - Pacote de icones
 
 

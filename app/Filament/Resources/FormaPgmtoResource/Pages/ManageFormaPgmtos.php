@@ -10,10 +10,13 @@ class ManageFormaPgmtos extends ManageRecords
 {
     protected static string $resource = FormaPgmtoResource::class;
 
+    protected static ?string $title = 'Formas de Pagamento';
+
     protected function getActions(): array
     {
         return [
             Actions\CreateAction::make()
+                ->modalHeading('Criar forma de pagamento')
                 ->label('Novo'),
         ];
     }

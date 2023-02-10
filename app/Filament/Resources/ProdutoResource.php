@@ -2,9 +2,9 @@
 
 namespace App\Filament\Resources;
 
-use App\Filament\Resources\FormaPgmtoResource\Pages;
-use App\Filament\Resources\FormaPgmtoResource\RelationManagers;
-use App\Models\FormaPgmto;
+use App\Filament\Resources\ProdutoResource\Pages;
+use App\Filament\Resources\ProdutoResource\RelationManagers;
+use App\Models\Produto;
 use Filament\Forms;
 use Filament\Resources\Form;
 use Filament\Resources\Resource;
@@ -13,17 +13,13 @@ use Filament\Tables;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 
-class FormaPgmtoResource extends Resource
+class ProdutoResource extends Resource
 {
-    protected static ?string $model = FormaPgmto::class;
+    protected static ?string $model = Produto::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-users';
-
-    protected static ?string $navigationLabel = 'Formas de Pagamento';
+    protected static ?string $navigationIcon = 'heroicon-o-collection';
 
     protected static ?string $navigationGroup = 'Cadastros';
-
-    
 
     public static function form(Form $form): Form
     {
@@ -32,6 +28,12 @@ class FormaPgmtoResource extends Resource
                 Forms\Components\TextInput::make('nome')
                     ->required()
                     ->maxLength(255),
+                Forms\Components\TextInput::make('estoque'),
+                Forms\Components\TextInput::make('valor_compra'),
+                Forms\Components\TextInput::make('lucratividade')
+                    ->required(),
+                Forms\Components\TextInput::make('valor_venda'),
+                   
             ]);
     }
 
@@ -40,6 +42,13 @@ class FormaPgmtoResource extends Resource
         return $table
             ->columns([
                 Tables\Columns\TextColumn::make('nome'),
+                Tables\Columns\TextColumn::make('estoque'),
+                Tables\Columns\TextColumn::make('valor_compra')
+                ->money('BRL'),
+                Tables\Columns\TextColumn::make('lucratividade')
+                ->label('Lucratividade (%)'),
+                Tables\Columns\TextColumn::make('valor_venda')
+                ->money('BRL'),
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime(),
                 Tables\Columns\TextColumn::make('updated_at')
@@ -49,8 +58,7 @@ class FormaPgmtoResource extends Resource
                 //
             ])
             ->actions([
-                Tables\Actions\EditAction::make()
-                    ->modalHeading('Editar forma de pagamento'),
+                Tables\Actions\EditAction::make(),
                 Tables\Actions\DeleteAction::make(),
             ])
             ->bulkActions([
@@ -61,12 +69,7 @@ class FormaPgmtoResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ManageFormaPgmtos::route('/'),
+            'index' => Pages\ManageProdutos::route('/'),
         ];
     }    
-
-    protected function getRedirectUrl(): string
-    {
-        return $this->getResource()::getUrl('index');
-    }
 }

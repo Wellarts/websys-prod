@@ -2,11 +2,10 @@
 
 namespace App\Filament\Resources;
 
-
+use App\Filament\Resources\FuncionarioResource\Pages;
+use App\Filament\Resources\FuncionarioResource\RelationManagers;
 use App\Models\Estado;
-use App\Filament\Resources\ClienteResource\Pages;
-use App\Filament\Resources\ClienteResource\RelationManagers;
-use App\Models\Cliente;
+use App\Models\Funcionario;
 use Filament\Forms;
 use Filament\Resources\Form;
 use Filament\Resources\Resource;
@@ -15,11 +14,11 @@ use Filament\Tables;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 
-class ClienteResource extends Resource
+class FuncionarioResource extends Resource
 {
-    protected static ?string $model = Cliente::class;
+    protected static ?string $model = Funcionario::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-users';
+    protected static ?string $navigationIcon = 'heroicon-o-collection';
 
     protected static ?string $navigationGroup = 'Cadastros';
 
@@ -30,9 +29,9 @@ class ClienteResource extends Resource
                 Forms\Components\TextInput::make('nome')
                     ->required()
                     ->maxLength(255),
-                Forms\Components\TextInput::make('cpf_cnpj')
-                    ->label('CPF/CNPJ')
-                  //  ->mask(fn (Forms\Components\TextInput\Mask $mask) => $mask->pattern('000.000.000-00'))
+                Forms\Components\TextInput::make('cpf')
+                    ->label('CPF')
+                    ->mask(fn (Forms\Components\TextInput\Mask $mask) => $mask->pattern('000.000.000-00'))
                     ->maxLength(50),
                 Forms\Components\Textarea::make('endereco')
                     ->label('Endereço'),
@@ -86,7 +85,8 @@ class ClienteResource extends Resource
                 //
             ])
             ->actions([
-                Tables\Actions\EditAction::make(),
+                Tables\Actions\EditAction::make()
+                ->modalHeading('Editar funcionário'),
                 Tables\Actions\DeleteAction::make(),
             ])
             ->bulkActions([
@@ -97,7 +97,7 @@ class ClienteResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ManageClientes::route('/'),
+            'index' => Pages\ManageFuncionarios::route('/'),
         ];
     }    
 }
