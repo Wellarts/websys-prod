@@ -16,4 +16,14 @@ class Produto extends Model
             'lucratividade',
             'valor_venda',
     ];
+
+    public function ProdutoFornecedor() 
+    {
+        return $this->hasMany(ProdutoFornecedor::class);
+    }
+
+    public function itensCompra() 
+    {
+        return $this->hasMany(ItensCompra::class);
+    }
 }

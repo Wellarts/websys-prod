@@ -4,7 +4,9 @@ namespace App\Filament\Resources;
 
 use App\Filament\Resources\ProdutoResource\Pages;
 use App\Filament\Resources\ProdutoResource\RelationManagers;
+use App\Filament\Resources\ProdutoResource\RelationManagers\ProdutoFornecedorRelationManager;
 use App\Models\Produto;
+use Closure;
 use Filament\Forms;
 use Filament\Resources\Form;
 use Filament\Resources\Resource;
@@ -29,10 +31,19 @@ class ProdutoResource extends Resource
                     ->required()
                     ->maxLength(255),
                 Forms\Components\TextInput::make('estoque'),
-                Forms\Components\TextInput::make('valor_compra'),
+                Forms\Components\TextInput::make('valor_compra')
+                    ->reactive()
+                    ->afterStateUpdated(function (Closure $get, Closure $set) {
+                        $set('valor_venda', ((($get('valor_compra') * $get('lucratividade'))/100) + $get('valor_compra')));
+                    }),
                 Forms\Components\TextInput::make('lucratividade')
-                    ->required(),
-                Forms\Components\TextInput::make('valor_venda'),
+                    ->required()
+                    ->reactive()
+                    ->afterStateUpdated(function (Closure $get, Closure $set) {
+                        $set('valor_venda', ((($get('valor_compra') * $get('lucratividade'))/100) + $get('valor_compra')));
+                    }),
+                Forms\Components\TextInput::make('valor_venda')
+                    ->disabled(),
                    
             ]);
     }
@@ -44,11 +55,11 @@ class ProdutoResource extends Resource
                 Tables\Columns\TextColumn::make('nome'),
                 Tables\Columns\TextColumn::make('estoque'),
                 Tables\Columns\TextColumn::make('valor_compra')
-                ->money('BRL'),
+                    ->money('BRL'),
                 Tables\Columns\TextColumn::make('lucratividade')
-                ->label('Lucratividade (%)'),
+                    ->label('Lucratividade (%)'),
                 Tables\Columns\TextColumn::make('valor_venda')
-                ->money('BRL'),
+                    ->money('BRL'),
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime(),
                 Tables\Columns\TextColumn::make('updated_at')
@@ -59,17 +70,25 @@ class ProdutoResource extends Resource
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
-                Tables\Actions\DeleteAction::make(),
             ])
             ->bulkActions([
                 Tables\Actions\DeleteBulkAction::make(),
             ]);
     }
     
+    public static function getRelations(): array
+    {
+        return [
+            ProdutoFornecedorRelationManager::class
+        ];
+    }
+    
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ManageProdutos::route('/'),
+            'index' => Pages\ListProdutos::route('/'),
+            'create' => Pages\CreateProduto::route('/create'),
+            'edit' => Pages\EditProduto::route('/{record}/edit'),
         ];
     }    
 }

@@ -17,7 +17,7 @@ class FormaPgmtoResource extends Resource
 {
     protected static ?string $model = FormaPgmto::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-users';
+    protected static ?string $navigationIcon = 'heroicon-s-credit-card';
 
     protected static ?string $navigationLabel = 'Formas de Pagamento';
 

@@ -30,4 +30,8 @@ class Fornecedor extends Model
     {
         return $this->belongsTo(Cidade::class);
     }
+
+    public function compra() {
+        return $this->hasMany(Compra::class);
+    }
 }
