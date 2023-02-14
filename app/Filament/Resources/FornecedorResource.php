@@ -18,7 +18,7 @@ class FornecedorResource extends Resource
 {
     protected static ?string $model = Fornecedor::class;
 
-    protected static ?string $navigationIcon = 'heroicon-s-user-circle';
+    protected static ?string $navigationIcon = 'heroicon-s-user-group';
 
     protected static ?string $navigationLabel = 'Fornecedores';
 

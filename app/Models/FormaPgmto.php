@@ -12,4 +12,9 @@ class FormaPgmto extends Model
     protected $fillable = [
         'nome'
     ];
+
+    public function venda()
+    {
+        return $this->hasMany(Venda::class);
+    }
 }
