@@ -32,4 +32,9 @@ class Compra extends Model
     {
         return $this->hasMany(ProdutoFornecedor::class);
     }
+
+    public function contasPagar() 
+    {
+        return $this->hasMany(contasPagar::class);
+    }
 }

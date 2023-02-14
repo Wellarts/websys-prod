@@ -4,6 +4,7 @@ namespace App\Filament\Resources;
 
 use App\Filament\Resources\CompraResource\Pages;
 use App\Filament\Resources\CompraResource\RelationManagers;
+use App\Filament\Resources\CompraResource\RelationManagers\ContasPagarRelationManager;
 use App\Filament\Resources\CompraResource\RelationManagers\ItensCompraRelationManager;
 use App\Models\Compra;
 use App\Models\Fornecedor;
@@ -73,7 +74,8 @@ class CompraResource extends Resource
     public static function getRelations(): array
     {
         return [
-            ItensCompraRelationManager::class
+            ItensCompraRelationManager::class,
+            ContasPagarRelationManager::class
         ];
     }
     

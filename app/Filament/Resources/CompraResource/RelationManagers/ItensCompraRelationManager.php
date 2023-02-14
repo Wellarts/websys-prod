@@ -118,8 +118,11 @@ class ItensCompraRelationManager extends RelationManager
                 Tables\Actions\DeleteAction::make()
                  ->before(function ($data, $record) {
                       $produto = Produto::find($record->produto_id);
+                      $compra = Compra::find($record->compra_id);
+                      $compra->valor_total -= $record->sub_total;
                       $produto->estoque -= ($record->qtd);
                       $produto->save();
+                      $compra->save();
 
                       $prodFornecedor = [
                         'compra_id' => $record->compra_id,

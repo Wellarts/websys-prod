@@ -31,7 +31,13 @@ class Fornecedor extends Model
         return $this->belongsTo(Cidade::class);
     }
 
-    public function compra() {
+    public function compra() 
+    {
         return $this->hasMany(Compra::class);
+    }
+
+    public function contasPagar() 
+    {
+        return $this->hasMany(contasPagar::class);
     }
 }
