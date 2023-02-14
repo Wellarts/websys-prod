@@ -9,4 +9,6 @@ use Filament\Resources\Pages\CreateRecord;
 class CreateProduto extends CreateRecord
 {
     protected static string $resource = ProdutoResource::class;
+
+    
 }

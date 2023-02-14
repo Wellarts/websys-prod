@@ -52,7 +52,6 @@ class CompraResource extends Resource
                 Tables\Columns\TextColumn::make('fornecedor.nome'),
                 Tables\Columns\TextColumn::make('data_compra')
                     ->date(),
-                Tables\Columns\TextColumn::make('outros_custos'),
                 Tables\Columns\TextColumn::make('valor_total')
                     ->money('BRL'),
                 Tables\Columns\TextColumn::make('created_at')
@@ -64,7 +63,7 @@ class CompraResource extends Resource
                 //
             ])
             ->actions([
-                Tables\Actions\EditAction::make(),
+               Tables\Actions\EditAction::make(),
             ])
             ->bulkActions([
                 Tables\Actions\DeleteBulkAction::make(),

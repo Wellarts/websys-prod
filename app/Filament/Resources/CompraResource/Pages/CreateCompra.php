@@ -11,5 +11,4 @@ class CreateCompra extends CreateRecord
     protected static string $resource = CompraResource::class;
 
     
-
 }

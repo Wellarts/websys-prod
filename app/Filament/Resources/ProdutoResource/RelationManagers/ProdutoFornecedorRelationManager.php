@@ -34,7 +34,7 @@ class ProdutoFornecedorRelationManager extends RelationManager
                 ->label('Venda'),
                 Tables\Columns\TextColumn::make('compra.fornecedor.nome'),
                 Tables\Columns\TextColumn::make('compra.data_compra')
-                ->format('d/m/Y')
+                ->date('d/m/y'),
 
             ])
             ->filters([
