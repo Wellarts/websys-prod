@@ -10,6 +10,8 @@ class ManageFuncionarios extends ManageRecords
 {
     protected static string $resource = FuncionarioResource::class;
 
+    protected static ?string $title = 'Funcionários';
+
     protected function getActions(): array
     {
         return [

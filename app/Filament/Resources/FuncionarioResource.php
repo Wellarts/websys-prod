@@ -22,6 +22,8 @@ class FuncionarioResource extends Resource
 
     protected static ?string $navigationGroup = 'Cadastros';
 
+    protected static ?string $navigationLabel = 'Funcionários';
+
     public static function form(Form $form): Form
     {
         return $form

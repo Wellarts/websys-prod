@@ -13,10 +13,10 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('contas_pagars', function (Blueprint $table) {
+        Schema::create('contas_recebers', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('fornecedor_id')->constrained('fornecedors')->restrictOnDelete();
-            $table->foreignId('compra_id')->constrained('compras')->restrictOnDelete();
+            $table->foreignId('cliente_id')->constrained('clientes')->restrictOnDelete();
+            $table->foreignId('venda_id')->constrained('vendas')->restrictOnDelete();
             $table->string('parcelas');
             $table->string('ordem_parcela');
             $table->date('data_vencimento');
@@ -24,7 +24,7 @@ return new class extends Migration
             $table->boolean('status');
             $table->decimal('valor_total',10,2);
             $table->decimal('valor_parcela',10,2);
-            $table->decimal('valor_pago',10,2);
+            $table->decimal('valor_recebido',10,2);
             $table->longText('obs');
             $table->timestamps();
         });
@@ -37,6 +37,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('contas_pagars');
+        Schema::dropIfExists('contas_recebers');
     }
 };

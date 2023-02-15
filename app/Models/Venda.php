@@ -40,5 +40,10 @@ class Venda extends Model
         return $this->hasMany(itensVenda::class);
     }
 
+    public function contasReceber()
+    {
+        return $this->hasMany(ContasReceber::class);
+    }
+
 
 }

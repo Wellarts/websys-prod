@@ -4,6 +4,7 @@ namespace App\Filament\Resources;
 
 use App\Filament\Resources\VendaResource\Pages;
 use App\Filament\Resources\VendaResource\RelationManagers;
+use App\Filament\Resources\VendaResource\RelationManagers\ContasReceberRelationManager;
 use App\Filament\Resources\VendaResource\RelationManagers\ItensVendaRelationManager;
 use App\Models\Cliente;
 use App\Models\FormaPgmto;
@@ -87,7 +88,8 @@ class VendaResource extends Resource
     public static function getRelations(): array
     {
         return [
-            ItensVendaRelationManager::class
+            ItensVendaRelationManager::class,
+            ContasReceberRelationManager::class
         ];
     }
     

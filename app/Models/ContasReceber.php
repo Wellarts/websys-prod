@@ -5,13 +5,13 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class contasPagar extends Model
+class ContasReceber extends Model
 {
     use HasFactory;
 
     protected $fillable = [
-        'fornecedor_id',
-        'compra_id',
+        'cliente_id',
+        'venda_id',
         'parcelas',
         'ordem_parcela',
         'data_vencimento',
@@ -19,17 +19,17 @@ class contasPagar extends Model
         'status',
         'valor_total',
         'valor_parcela',
-        'valor_pago',
+        'valor_recebido',
         'obs'
     ];
 
-    public function compra()
+    public function venda()
     {
-        return $this->belongsTo(Compra::class);
+        return $this->belongsTo(Venda::class);
     }
 
-    public function fornecedor()
+    public function cliente()
     {
-        return $this->belongsTo(Fornecedor::class);
+        return $this->belongsTo(Cliente::class);
     }
 }

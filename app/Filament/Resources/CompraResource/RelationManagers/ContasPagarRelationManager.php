@@ -2,7 +2,11 @@
 
 namespace App\Filament\Resources\CompraResource\RelationManagers;
 
+use App\Models\contasPagar;
+use App\Models\FluxoCaixa;
 use App\Models\Fornecedor;
+use Carbon\Carbon;
+use Closure;
 use Filament\Forms;
 use Filament\Resources\Form;
 use Filament\Resources\RelationManagers\RelationManager;
@@ -16,6 +20,8 @@ class ContasPagarRelationManager extends RelationManager
     protected static string $relationship = 'ContasPagar';
 
     protected static ?string $recordTitleAttribute = 'compra_id';
+
+    protected static ?string $title = 'Contas a Pagar';
 
     public static function form(Form $form): Form
     {
@@ -37,22 +43,42 @@ class ContasPagarRelationManager extends RelationManager
                         ->toArray();
                 }) 
                 ->required(),
-
-
             Forms\Components\TextInput::make('valor_total')
                 ->label('Valor Total')
                 ->default((function ($livewire): int {
                 return $livewire->ownerRecord->valor_total;
             }))
+                ->disabled()
                 ->required(),
-            Forms\Components\TextInput::make('parcelas')
+                Forms\Components\TextInput::make('parcelas')
                 ->default('1')
+                ->reactive()
+                ->afterStateUpdated(function (Closure $get, Closure $set) {
+                    if($get('parcelas') != 1)
+                       {
+                        $set('valor_parcela', (($get('valor_total') / $get('parcelas'))));
+                        $set('status', 0);
+                        $set('valor_pago', 0);
+                        $set('data_pagamento', null);
+                        $set('data_vencimento',  Carbon::now()->addDays(30));
+                       }
+                    else
+                        {
+                            $set('valor_parcela', $get('valor_total'));
+                            $set('status', 1);
+                            $set('valor_pago', $get('valor_total'));
+                            $set('data_pagamento', Carbon::now());
+                            $set('data_vencimento',  Carbon::now());  
+                        }    
+      
+                })
                 ->required(),
             Forms\Components\DatePicker::make('data_pagamento')
                 ->default(now())
-                ->label("Data do Pagamento")
-                ->required(),
-            Forms\Components\TextInput::make('ordemParcela')
+                ->label("Data do Pagamento"),
+           Forms\Components\TextInput::make('ordem_parcela')
+                ->label('Parcela Nº')
+                ->disabled()
                 ->default('1')
                 ->required(),
             Forms\Components\DatePicker::make('data_vencimento')
@@ -61,20 +87,38 @@ class ContasPagarRelationManager extends RelationManager
                 ->required(),
             Forms\Components\Toggle::make('status')
                 ->default('true')
-                ->label('Pago')
-                ->required(),
-            Forms\Components\TextInput::make('obs')
-                ->maxLength(191),
+                ->label('Recebido')
+                ->required()
+                ->reactive()
+                ->afterStateUpdated(function (Closure $get, Closure $set) {
+                             if($get('status') == 1)
+                                 {
+                                     $set('valor_pago', $get('valor_parcela'));
+                                     $set('data_pagamento', Carbon::now());
+
+                                 }
+                             else
+                                 {
+                                     
+                                     $set('valor_pago', 0);
+                                     $set('data_pagamento', null);
+                                 } 
+                             }      
+                 ),
             Forms\Components\TextInput::make('valor_pago')
                 ->default((function ($livewire): int {
                         return $livewire->ownerRecord->valor_total;
-                }))
-                ->required(),
+                })),
             Forms\Components\TextInput::make('valor_parcela')
                 ->default((function ($livewire): int {
                         return $livewire->ownerRecord->valor_total;
                 }))
-                ->required(),
+                ->required()
+                ->disabled(),
+            Forms\Components\Textarea::make('obs')
+                ->columnSpanFull()
+                ->label('Observações'),
+                
             ]);
     }
 
@@ -82,16 +126,88 @@ class ContasPagarRelationManager extends RelationManager
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('compra_id'),
+                Tables\Columns\TextColumn::make('fornecedor.nome'),
+                Tables\Columns\TextColumn::make('ordem_parcela')
+                    ->label('Parcela Nº'),
+                Tables\Columns\TextColumn::make('data_vencimento')
+                    ->date(),
+                Tables\Columns\TextColumn::make('valor_total'),
+                
+                Tables\Columns\TextColumn::make('valor_parcela'),       
+                Tables\Columns\IconColumn::make('status')
+                    ->label('Pago')
+                    ->boolean(),
+                Tables\Columns\TextColumn::make('data_pagamento')
+                    ->date(),    
+                Tables\Columns\TextColumn::make('valor_pago'),
+                
+                Tables\Columns\TextColumn::make('created_at')
+                    ->dateTime(),
+                Tables\Columns\TextColumn::make('updated_at')
+                    ->dateTime(),
             ])
             ->filters([
                 //
             ])
             ->headerActions([
-                Tables\Actions\CreateAction::make(),
-            ])
+                Tables\Actions\CreateAction::make()
+                ->label('Adicionar')
+                ->after(function ($data, $record) {
+                    if($record->parcelas > 1)
+                    {
+                        $valor_parcela = ($record->valor_total / $record->parcelas);
+                        $vencimentos = Carbon::create($record->data_vencimento);
+                        for($cont = 1; $cont < $data['parcelas']; $cont++)
+                        {
+                                            $dataVencimentos = $vencimentos->addDays(30);
+                                            $parcelas = [
+                                            'compra_id' => $record->compra_id,
+                                            'fornecedor_id' => $data['fornecedor_id'],
+                                            'valor_total' => $data['valor_total'],
+                                            'parcelas' => $data['parcelas'],
+                                            'ordem_parcela' => $cont+1,
+                                            'data_vencimento' => $dataVencimentos,
+                                            'valor_pago' => 0.00,
+                                            'status' => 0,
+                                            'obs' => 'Compra...',
+                                            'valor_parcela' => $valor_parcela,
+                                            ];
+                                contasPagar::create($parcelas);
+                        }
+
+                    }
+                    else
+                    {
+                        $addFluxoCaixa = [
+                            'valor' => ($record->valor_total * -1),
+                            'tipo'  => 'DEBITO',
+                            'obs'   => 'Pagamento da compra nº: '.$record->compra_id. '',
+                        ];
+
+                        FluxoCaixa::create($addFluxoCaixa);
+                    }
+
+
+                }
+            ),
+        ])
+        
             ->actions([
-                Tables\Actions\EditAction::make(),
+                Tables\Actions\EditAction::make()
+                    ->after(function ($data, $record) {
+
+                    if($record->status = 1)
+                    {
+                        $addFluxoCaixa = [
+                            'valor' => ($record->valor_parcela * -1),
+                            'tipo'  => 'DEBITO',
+                            'obs'   => 'Pagamento da compra nº: '.$record->compra_id. '',
+                        ];
+
+                        FluxoCaixa::create($addFluxoCaixa); 
+                    }
+                    
+                }),
                 Tables\Actions\DeleteAction::make(),
             ])
             ->bulkActions([

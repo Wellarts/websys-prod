@@ -110,9 +110,13 @@ class ItensCompraRelationManager extends RelationManager
                     ->before(function ($data) {
                         $produto = Produto::find($data['produto_id']);
                         $idItemCompra = ItensCompra::find($data['id']);
+                        $compra = Compra::find($data['compra_id']);
                         $produto->estoque += ($data['qtd'] - $idItemCompra->qtd);
                         $produto->valor_compra = $data['valor_compra'];
                         $produto->valor_venda = ($produto->valor_compra + ($data['valor_compra'] * ($produto->lucratividade / 100)));
+                        $compra->valor_total += ($data['sub_total'] - $idItemCompra->sub_total);
+                       // dd($compra->valor_total);
+                        $compra->save();
                         $produto->save();
                     }),
                 Tables\Actions\DeleteAction::make()

@@ -30,4 +30,9 @@ class Cliente extends Model
     {
         return $this->belongsTo(Cidade::class);
     }
+
+    public function contasReceber()
+    {
+        return $this->belongsTo(ContasReceber::class);
+    }
 }
