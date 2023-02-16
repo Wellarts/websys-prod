@@ -3,6 +3,7 @@
 namespace App\Filament\Resources\ContasPagarResource\Pages;
 
 use App\Filament\Resources\ContasPagarResource;
+use App\Filament\Resources\ContasPagarResource\Widgets\PagarStatsOverview;
 use Filament\Pages\Actions;
 use Filament\Resources\Pages\ManageRecords;
 
@@ -16,6 +17,14 @@ class ManageContasPagars extends ManageRecords
     {
         return [
             //Actions\CreateAction::make(),
+        ];
+    }
+
+    protected function getHeaderWidgets(): array
+    {
+        return [
+            PagarStatsOverview::class,
+         //   VendasMesChart::class,
         ];
     }
 }

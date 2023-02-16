@@ -3,6 +3,7 @@
 namespace App\Filament\Resources\ContasReceberResource\Pages;
 
 use App\Filament\Resources\ContasReceberResource;
+use App\Filament\Resources\ContasReceberResource\Widgets\ReceberStatsOverview;
 use Filament\Pages\Actions;
 use Filament\Resources\Pages\ManageRecords;
 
@@ -16,6 +17,14 @@ class ManageContasRecebers extends ManageRecords
     {
         return [
           // Actions\CreateAction::make(),
+        ];
+    }
+
+    protected function getHeaderWidgets(): array
+    {
+        return [
+            ReceberStatsOverview::class,
+         //   VendasMesChart::class,
         ];
     }
 }
