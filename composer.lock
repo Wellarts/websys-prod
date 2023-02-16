@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "534b20bf2687487f1c1a1e52a533863a",
+    "content-hash": "23abe1cd045a8f71a0ca79a065d996bf",
     "packages": [
         {
             "name": "akaunting/laravel-money",
@@ -759,16 +759,16 @@
         },
         {
             "name": "filament/filament",
-            "version": "v2.17.0",
+            "version": "v2.16.70",
             "source": {
                 "type": "git",
                 "url": "https://github.com/filamentphp/app.git",
-                "reference": "b39af33da4e12b3ef66ff2fa9aec715066091956"
+                "reference": "d07e7cabe4bf40381f35cf1155cde9cdfd9f52bd"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/filamentphp/app/zipball/b39af33da4e12b3ef66ff2fa9aec715066091956",
-                "reference": "b39af33da4e12b3ef66ff2fa9aec715066091956",
+                "url": "https://api.github.com/repos/filamentphp/app/zipball/d07e7cabe4bf40381f35cf1155cde9cdfd9f52bd",
+                "reference": "d07e7cabe4bf40381f35cf1155cde9cdfd9f52bd",
                 "shasum": ""
             },
             "require": {
@@ -818,20 +818,20 @@
                 "issues": "https://github.com/filamentphp/filament/issues",
                 "source": "https://github.com/filamentphp/filament"
             },
-            "time": "2023-02-14T20:59:35+00:00"
+            "time": "2023-02-09T17:27:21+00:00"
         },
         {
             "name": "filament/forms",
-            "version": "v2.17.0",
+            "version": "v2.16.70",
             "source": {
                 "type": "git",
                 "url": "https://github.com/filamentphp/forms.git",
-                "reference": "3f782c6d5b0f1d4f01c5b7dcd805278d5c6d6d93"
+                "reference": "0a02fb605928e228ea0c22bd3d7867035f48a5c8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/filamentphp/forms/zipball/3f782c6d5b0f1d4f01c5b7dcd805278d5c6d6d93",
-                "reference": "3f782c6d5b0f1d4f01c5b7dcd805278d5c6d6d93",
+                "url": "https://api.github.com/repos/filamentphp/forms/zipball/0a02fb605928e228ea0c22bd3d7867035f48a5c8",
+                "reference": "0a02fb605928e228ea0c22bd3d7867035f48a5c8",
                 "shasum": ""
             },
             "require": {
@@ -876,11 +876,11 @@
                 "issues": "https://github.com/filamentphp/filament/issues",
                 "source": "https://github.com/filamentphp/filament"
             },
-            "time": "2023-02-14T20:59:35+00:00"
+            "time": "2023-02-09T17:27:19+00:00"
         },
         {
             "name": "filament/notifications",
-            "version": "v2.17.0",
+            "version": "v2.16.70",
             "source": {
                 "type": "git",
                 "url": "https://github.com/filamentphp/notifications.git",
@@ -933,16 +933,16 @@
         },
         {
             "name": "filament/support",
-            "version": "v2.17.0",
+            "version": "v2.16.70",
             "source": {
                 "type": "git",
                 "url": "https://github.com/filamentphp/support.git",
-                "reference": "25700a9bb9cff5cc78d169bed2a2ef11379fbef2"
+                "reference": "ec71eac0ff6e67610d80fc2b9bc36720cb9ecd77"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/filamentphp/support/zipball/25700a9bb9cff5cc78d169bed2a2ef11379fbef2",
-                "reference": "25700a9bb9cff5cc78d169bed2a2ef11379fbef2",
+                "url": "https://api.github.com/repos/filamentphp/support/zipball/ec71eac0ff6e67610d80fc2b9bc36720cb9ecd77",
+                "reference": "ec71eac0ff6e67610d80fc2b9bc36720cb9ecd77",
                 "shasum": ""
             },
             "require": {
@@ -979,20 +979,20 @@
                 "issues": "https://github.com/filamentphp/filament/issues",
                 "source": "https://github.com/filamentphp/filament"
             },
-            "time": "2023-02-14T21:00:00+00:00"
+            "time": "2023-02-09T00:05:48+00:00"
         },
         {
             "name": "filament/tables",
-            "version": "v2.17.0",
+            "version": "v2.16.70",
             "source": {
                 "type": "git",
                 "url": "https://github.com/filamentphp/tables.git",
-                "reference": "c80117dabbc205d07e15588bb5f23842b6f83651"
+                "reference": "3e3c786ab4c270a9396a370e76983ff8509bf896"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/filamentphp/tables/zipball/c80117dabbc205d07e15588bb5f23842b6f83651",
-                "reference": "c80117dabbc205d07e15588bb5f23842b6f83651",
+                "url": "https://api.github.com/repos/filamentphp/tables/zipball/3e3c786ab4c270a9396a370e76983ff8509bf896",
+                "reference": "3e3c786ab4c270a9396a370e76983ff8509bf896",
                 "shasum": ""
             },
             "require": {
@@ -1035,7 +1035,7 @@
                 "issues": "https://github.com/filamentphp/filament/issues",
                 "source": "https://github.com/filamentphp/filament"
             },
-            "time": "2023-02-14T21:00:02+00:00"
+            "time": "2023-02-09T00:05:45+00:00"
         },
         {
             "name": "fruitcake/php-cors",
@@ -3961,6 +3961,88 @@
                 }
             ],
             "time": "2023-01-27T15:33:45+00:00"
+        },
+        {
+            "name": "spatie/laravel-permission",
+            "version": "5.9.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/spatie/laravel-permission.git",
+                "reference": "a88ed98c8937442737e0c50163682e832d608f13"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/spatie/laravel-permission/zipball/a88ed98c8937442737e0c50163682e832d608f13",
+                "reference": "a88ed98c8937442737e0c50163682e832d608f13",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/auth": "^7.0|^8.0|^9.0|^10.0",
+                "illuminate/container": "^7.0|^8.0|^9.0|^10.0",
+                "illuminate/contracts": "^7.0|^8.0|^9.0|^10.0",
+                "illuminate/database": "^7.0|^8.0|^9.0|^10.0",
+                "php": "^7.3|^8.0"
+            },
+            "require-dev": {
+                "orchestra/testbench": "^5.0|^6.0|^7.0|^8.0",
+                "phpunit/phpunit": "^9.4",
+                "predis/predis": "^1.1"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-main": "5.x-dev",
+                    "dev-master": "5.x-dev"
+                },
+                "laravel": {
+                    "providers": [
+                        "Spatie\\Permission\\PermissionServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "files": [
+                    "src/helpers.php"
+                ],
+                "psr-4": {
+                    "Spatie\\Permission\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Freek Van der Herten",
+                    "email": "freek@spatie.be",
+                    "homepage": "https://spatie.be",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Permission handling for Laravel 6.0 and up",
+            "homepage": "https://github.com/spatie/laravel-permission",
+            "keywords": [
+                "acl",
+                "laravel",
+                "permission",
+                "permissions",
+                "rbac",
+                "roles",
+                "security",
+                "spatie"
+            ],
+            "support": {
+                "issues": "https://github.com/spatie/laravel-permission/issues",
+                "source": "https://github.com/spatie/laravel-permission/tree/5.9.1"
+            },
+            "funding": [
+                {
+                    "url": "https://github.com/spatie",
+                    "type": "github"
+                }
+            ],
+            "time": "2023-02-06T21:37:02+00:00"
         },
         {
             "name": "symfony/console",

@@ -2,11 +2,11 @@
 
 namespace App\Filament\Resources;
 
-use App\Filament\Resources\ContasPagarResource\Pages;
-use App\Filament\Resources\ContasPagarResource\RelationManagers;
-use App\Models\ContasPagar;
+use App\Filament\Resources\ContasReceberResource\Pages;
+use App\Filament\Resources\ContasReceberResource\RelationManagers;
+use App\Models\Cliente;
+use App\Models\ContasReceber;
 use App\Models\FluxoCaixa;
-use App\Models\Fornecedor;
 use Carbon\Carbon;
 use Closure;
 use Filament\Forms;
@@ -17,28 +17,26 @@ use Filament\Tables;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 
-class ContasPagarResource extends Resource
+class ContasReceberResource extends Resource
 {
-    protected static ?string $model = ContasPagar::class;
+    protected static ?string $model = ContasReceber::class;
 
-    protected static ?string $navigationIcon = 'heroicon-s-trending-down';
+    protected static ?string $navigationIcon = 'heroicon-s-trending-up';
 
-    protected static ?string $navigationLabel = 'Contas a Pagar';
+    protected static ?string $navigationLabel = 'Contas a Receber';
 
     protected static ?string $navigationGroup = 'Financeiro';
-
-    
 
     public static function form(Form $form): Form
     {
         return $form
             ->schema([
-                Forms\Components\Select::make('fornecedor_id')
-                    ->label('Fornecedor')
-                    ->options(Fornecedor::all()->pluck('nome', 'id')->toArray())
+                Forms\Components\Select::make('cliente_id')
+                    ->label('Cliente')
+                    ->options(Cliente::all()->pluck('nome', 'id')->toArray())
                     ->required()
                     ->disabled(),
-                Forms\Components\TextInput::make('compra_id')
+                Forms\Components\TextInput::make('venda_id')
                     ->hidden()
                     ->required(),
                 Forms\Components\TextInput::make('parcelas')
@@ -63,14 +61,14 @@ class ContasPagarResource extends Resource
                 ->afterStateUpdated(function (Closure $get, Closure $set) {
                              if($get('status') == 1)
                                  {
-                                     $set('valor_pago', $get('valor_parcela'));
+                                     $set('valor_recebido', $get('valor_parcela'));
                                      $set('data_pagamento', Carbon::now());
 
                                  }
                              else
                                  {
                                      
-                                     $set('valor_pago', 0);
+                                     $set('valor_recebido', 0);
                                      $set('data_pagamento', null);
                                  } 
                              }      
@@ -79,7 +77,7 @@ class ContasPagarResource extends Resource
                 Forms\Components\TextInput::make('valor_parcela')
                     ->disabled()
                     ->required(),
-                Forms\Components\TextInput::make('valor_pago'),
+                Forms\Components\TextInput::make('valor_recebido'),
                 Forms\Components\Textarea::make('obs'),
             ]);
     }
@@ -88,9 +86,9 @@ class ContasPagarResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('compra_id')
+                Tables\Columns\TextColumn::make('venda_id')
                     ->label('Compra'),
-                Tables\Columns\TextColumn::make('fornecedor.nome'),
+                Tables\Columns\TextColumn::make('cliente.nome'),
                 Tables\Columns\TextColumn::make('ordem_parcela')
                     ->label('Parcela Nº'),
                 Tables\Columns\TextColumn::make('data_vencimento')
@@ -99,11 +97,11 @@ class ContasPagarResource extends Resource
                 
                 Tables\Columns\TextColumn::make('valor_parcela'),       
                 Tables\Columns\IconColumn::make('status')
-                    ->label('Pago')
+                    ->label('Recebido')
                     ->boolean(),
                 Tables\Columns\TextColumn::make('data_pagamento')
                     ->date(),    
-                Tables\Columns\TextColumn::make('valor_pago'),
+                Tables\Columns\TextColumn::make('valor_recebido'),
                 
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime(),
@@ -115,14 +113,14 @@ class ContasPagarResource extends Resource
             ])
             ->actions([
                 Tables\Actions\EditAction::make()
-                    ->after(function ($data, $record) {
+                ->after(function ($data, $record) {
 
                     if($record->status = 1)
                     {
                         $addFluxoCaixa = [
-                            'valor' => ($record->valor_parcela * -1),
-                            'tipo'  => 'DEBITO',
-                            'obs'   => 'Pagamento da compra nº: '.$record->compra_id. '',
+                            'valor' => ($record->valor_parcela),
+                            'tipo'  => 'CREDITO',
+                            'obs'   => 'Recebimento da venda nº: '.$record->venda_id. '',
                         ];
 
                         FluxoCaixa::create($addFluxoCaixa); 
@@ -138,7 +136,7 @@ class ContasPagarResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ManageContasPagars::route('/'),
+            'index' => Pages\ManageContasRecebers::route('/'),
         ];
     }    
 }

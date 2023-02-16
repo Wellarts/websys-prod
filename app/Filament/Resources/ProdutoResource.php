@@ -89,6 +89,7 @@ class ProdutoResource extends Resource
             'index' => Pages\ListProdutos::route('/'),
             'create' => Pages\CreateProduto::route('/create'),
             'edit' => Pages\EditProduto::route('/{record}/edit'),
+            'estoque' => Pages\EstoqueProdutos::route('/estoque'),
         ];
     }    
 }

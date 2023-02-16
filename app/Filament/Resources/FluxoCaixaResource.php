@@ -51,7 +51,6 @@ class FluxoCaixaResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('valor'),
                 Tables\Columns\BadgeColumn::make('tipo')
                 ->color(static function ($state): string {
                     if ($state === 'CREDITO') {
@@ -60,6 +59,7 @@ class FluxoCaixaResource extends Resource
              
                     return 'danger';
                 }),
+                Tables\Columns\TextColumn::make('valor'),
                 Tables\Columns\TextColumn::make('obs'),
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime(),
