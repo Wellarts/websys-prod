@@ -14,6 +14,10 @@ class EditVenda extends EditRecord
     {
         return [
             Actions\DeleteAction::make(),
+            Actions\CreateAction::make('teste')
+            ->label("Imprimir")
+            ->url(route('comprovante', $this->record))
+            ->openUrlInNewTab(),
         ];
     }
 }

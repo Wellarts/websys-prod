@@ -69,19 +69,21 @@ class VendaResource extends Resource
                     ->label('Forma de Pagamento'),
                 Tables\Columns\TextColumn::make('valor_total')
                     ->money('BRL'),
-                 Tables\Columns\TextColumn::make('created_at')
-                    ->dateTime(),
-                Tables\Columns\TextColumn::make('updated_at')
-                    ->dateTime(),
+                 
+               
             ])
             ->filters([
                 //
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
+                Tables\Actions\Action::make('Imprimir')
+                ->url(fn (Venda $record): string => route('comprovante', $record))
+                ->openUrlInNewTab(),
             ])
             ->bulkActions([
                 Tables\Actions\DeleteBulkAction::make(),
+                
             ]);
     }
     
@@ -99,6 +101,9 @@ class VendaResource extends Resource
             'index' => Pages\ListVendas::route('/'),
             'create' => Pages\CreateVenda::route('/create'),
             'edit' => Pages\EditVenda::route('/{record}/edit'),
+            'lucro' => Pages\LucroVenda::route('/lucro'),
         ];
     }    
+
+    
 }

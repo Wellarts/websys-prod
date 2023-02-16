@@ -3,6 +3,7 @@
 namespace App\Filament\Resources\FluxoCaixaResource\Pages;
 
 use App\Filament\Resources\FluxoCaixaResource;
+use App\Filament\Resources\FluxoCaixaResource\Widgets\CaixaStatsOverview;
 use Filament\Pages\Actions;
 use Filament\Resources\Pages\ManageRecords;
 
@@ -17,6 +18,14 @@ class ManageFluxoCaixas extends ManageRecords
         return [
             Actions\CreateAction::make()
                 ->label('Novo'),
+        ];
+    }
+
+    protected function getHeaderWidgets(): array
+    {
+        return [
+            CaixaStatsOverview::class,
+         //   VendasMesChart::class,
         ];
     }
 }

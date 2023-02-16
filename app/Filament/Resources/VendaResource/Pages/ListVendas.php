@@ -3,6 +3,8 @@
 namespace App\Filament\Resources\VendaResource\Pages;
 
 use App\Filament\Resources\VendaResource;
+use App\Filament\Resources\VendaResource\Widgets\VendaStatsOverview;
+use App\Filament\Resources\VendasResource\Widgets\ResumoVendas;
 use Filament\Pages\Actions;
 use Filament\Resources\Pages\ListRecords;
 
@@ -17,4 +19,14 @@ class ListVendas extends ListRecords
                 ->label('Novo'),
         ];
     }
+
+    protected function getHeaderWidgets(): array
+    {
+        return [
+            VendaStatsOverview::class,
+         //   VendasMesChart::class,
+        ];
+    }
+
+     
 }
