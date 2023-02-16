@@ -144,9 +144,9 @@ return [
         'register' => [
             Widgets\AccountWidget::class,
            // Widgets\FilamentInfoWidget::class,
+            CaixaStatsOverview::class,
             VendaStatsOverview::class,
-            VendasMesChart::class,
-            CaixaStatsOverview::class
+            VendasMesChart::class
         ],
     ],
 

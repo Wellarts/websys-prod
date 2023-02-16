@@ -16,9 +16,18 @@ class VendaStatsOverview extends BaseWidget
         $mes = date('m');
         $dia = date('d');
         return [
-            Card::make('Total de Vendas', Venda::all()->sum('valor_total')),
-            Card::make('Total de Vendas do Mês', DB::table('vendas')->whereMonth('data_venda', $mes)->sum('valor_total')),
+            Card::make('Total de Vendas', Venda::all()->sum('valor_total'))
+                ->description('Valor em Real')
+                ->descriptionIcon('heroicon-s-trending-up')
+                ->color('success'),
+            Card::make('Total de Vendas do Mês', DB::table('vendas')->whereMonth('data_venda', $mes)->sum('valor_total'))
+                ->description('Valor em Real')
+                ->descriptionIcon('heroicon-s-trending-up')
+                ->color('success'),
             Card::make('Total de Vendas do Mês', DB::table('vendas')->whereDay('data_venda', $dia)->sum('valor_total'))
+                ->description('Valor em Real')
+                ->descriptionIcon('heroicon-s-trending-up')
+                ->color('success'),
         ];
     }
 }
