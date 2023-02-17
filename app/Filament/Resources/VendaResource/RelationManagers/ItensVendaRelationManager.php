@@ -38,19 +38,24 @@ class ItensVendaRelationManager extends RelationManager
                     ->reactive()
                     ->required()
                     ->label('Produto')
-                    ->afterStateUpdated(function ($state, callable $set) {
+                    ->afterStateUpdated(function ($state, callable $set, Closure $get,) {
                         $produto = Produto::find($state);
                         if($produto) {
                             $set('valor_venda', $produto->valor_venda);
                             $set('valor_custo_atual', $produto->valor_compra);
+                            $set('sub_total', (($get('qtd') * $get('valor_venda')) + (float)$get('acres_desc')));
+                                
                         }
 
                     }
+
+                    
                 ),
                 Forms\Components\TextInput::make('valor_venda')
                     ->required()
                     ->disabled(),
                 Forms\Components\TextInput::make('qtd')
+                    ->default('1')
                     ->required()
                     ->reactive()
                     ->afterStateUpdated(function (Closure $get, Closure $set) {
