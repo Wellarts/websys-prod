@@ -5,6 +5,7 @@ namespace App\Filament\Resources\VendaResource\Pages;
 use App\Filament\Resources\VendaResource;
 use App\Filament\Resources\VendaResource\Widgets\VendaStatsOverview;
 use App\Filament\Resources\VendasResource\Widgets\ResumoVendas;
+use App\Filament\Widgets\TotalVendaStatsOverview;
 use Filament\Pages\Actions;
 use Filament\Resources\Pages\ListRecords;
 
@@ -23,8 +24,8 @@ class ListVendas extends ListRecords
     protected function getHeaderWidgets(): array
     {
         return [
-            VendaStatsOverview::class,
-         //   VendasMesChart::class,
+            VendaStatsOverview::class
+           
         ];
     }
 

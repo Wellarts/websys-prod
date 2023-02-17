@@ -11,6 +11,7 @@ use Filament\Resources\Form;
 use Filament\Resources\RelationManagers\RelationManager;
 use Filament\Resources\Table;
 use Filament\Tables;
+use Filament\Widgets\Widget;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 
@@ -99,6 +100,7 @@ class ItensVendaRelationManager extends RelationManager
                     $produto->save();
 
                 })
+                
             ])
             ->actions([
                 Tables\Actions\EditAction::make()
@@ -127,5 +129,7 @@ class ItensVendaRelationManager extends RelationManager
             ->bulkActions([
                 Tables\Actions\DeleteBulkAction::make(),
             ]);
-    }    
+    }  
+    
+    
 }

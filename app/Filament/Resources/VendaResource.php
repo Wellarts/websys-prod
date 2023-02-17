@@ -9,6 +9,7 @@ use App\Filament\Resources\VendaResource\RelationManagers\ItensVendaRelationMana
 use App\Models\Cliente;
 use App\Models\FormaPgmto;
 use App\Models\Funcionario;
+use App\Models\ItensVenda;
 use App\Models\Venda;
 use Filament\Forms;
 use Filament\Forms\Components\Card;
@@ -50,6 +51,8 @@ class VendaResource extends Resource
                             ->required(),
                         Forms\Components\Textarea::make('obs')
                             ->label('Observações'),
+                        Forms\Components\TextInput::make('Total')
+                            ->default(ItensVenda::all()->sum('sub_total')),   
                 ])->columns('2')              
 
             ]);
