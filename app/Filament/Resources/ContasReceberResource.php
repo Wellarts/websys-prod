@@ -14,6 +14,8 @@ use Filament\Resources\Form;
 use Filament\Resources\Resource;
 use Filament\Resources\Table;
 use Filament\Tables;
+use Filament\Tables\Filters\Filter;
+use Filament\Tables\Filters\SelectFilter;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 
@@ -67,13 +69,13 @@ class ContasReceberResource extends Resource
                                  }
                              else
                                  {
-                                     
+
                                      $set('valor_recebido', 0);
                                      $set('data_pagamento', null);
-                                 } 
-                             }      
+                                 }
+                             }
                  ),
-                
+
                 Forms\Components\TextInput::make('valor_parcela')
                     ->disabled()
                     ->required(),
@@ -94,22 +96,26 @@ class ContasReceberResource extends Resource
                 Tables\Columns\TextColumn::make('data_vencimento')
                     ->date(),
                 Tables\Columns\TextColumn::make('valor_total'),
-                
-                Tables\Columns\TextColumn::make('valor_parcela'),       
+
+                Tables\Columns\TextColumn::make('valor_parcela'),
                 Tables\Columns\IconColumn::make('status')
                     ->label('Recebido')
                     ->boolean(),
                 Tables\Columns\TextColumn::make('data_pagamento')
-                    ->date(),    
+                    ->date(),
                 Tables\Columns\TextColumn::make('valor_recebido'),
-                
+
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime(),
                 Tables\Columns\TextColumn::make('updated_at')
                     ->dateTime(),
             ])
             ->filters([
-                //
+                Filter::make('Aberta')
+
+                ->query(fn (Builder $query): Builder => $query->where('status', false)),
+
+                SelectFilter::make('cliente')->relationship('cliente', 'nome')
             ])
             ->actions([
                 Tables\Actions\EditAction::make()
@@ -123,20 +129,20 @@ class ContasReceberResource extends Resource
                             'obs'   => 'Recebimento da venda nº: '.$record->venda_id. '',
                         ];
 
-                        FluxoCaixa::create($addFluxoCaixa); 
+                        FluxoCaixa::create($addFluxoCaixa);
                     }
-                }),  
+                }),
                 Tables\Actions\DeleteAction::make(),
             ])
             ->bulkActions([
                 Tables\Actions\DeleteBulkAction::make(),
             ]);
     }
-    
+
     public static function getPages(): array
     {
         return [
             'index' => Pages\ManageContasRecebers::route('/'),
         ];
-    }    
+    }
 }
