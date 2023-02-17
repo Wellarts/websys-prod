@@ -11,18 +11,13 @@ use Illuminate\Support\Facades\DB;
 
 class TotalVendaStatsOverview extends BaseWidget
 {
-   
-    public ?Model $record = null;  
 
-    protected int | string | array $columnSpan = [
-        'md' => 1,
-        'xl' => 2,
-    ];
-   
-   
+    public ?Model $record = null;
+
+
     protected function getCards(): array
     {
-       
+
         $mes = date('m');
         $dia = date('d');
         return [
@@ -33,7 +28,7 @@ class TotalVendaStatsOverview extends BaseWidget
             Card::make('Valor Total da Venda', Venda::all()->where('id', $this->record->id)->sum('valor_total'))
                 ->description('Itens da Venda')
                 ->descriptionIcon('heroicon-s-trending-up')
-                ->color('success'),    
+                ->color('success'),
          /*   Card::make('Total de Vendas', DB::table('vendas')->whereDay('data_venda', $dia)->sum('valor_total'))
                 ->description('Hoje')
                 ->descriptionIcon('heroicon-s-trending-up')
@@ -41,5 +36,5 @@ class TotalVendaStatsOverview extends BaseWidget
         ];
     }
 
-    
+
 }
