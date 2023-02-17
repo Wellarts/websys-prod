@@ -14,6 +14,8 @@ use Filament\Resources\Form;
 use Filament\Resources\Resource;
 use Filament\Resources\Table;
 use Filament\Tables;
+use Filament\Tables\Filters\Filter;
+use Filament\Tables\Filters\SelectFilter;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 
@@ -109,7 +111,10 @@ class ContasReceberResource extends Resource
                     ->dateTime(),
             ])
             ->filters([
-                //
+                Filter::make('Aberta')
+                ->query(fn (Builder $query): Builder => $query->where('status', false)),
+                
+                SelectFilter::make('cliente')->relationship('cliente', 'nome') 
             ])
             ->actions([
                 Tables\Actions\EditAction::make()

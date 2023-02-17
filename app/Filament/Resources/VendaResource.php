@@ -51,8 +51,7 @@ class VendaResource extends Resource
                             ->required(),
                         Forms\Components\Textarea::make('obs')
                             ->label('Observações'),
-                        Forms\Components\TextInput::make('Total')
-                            ->default(ItensVenda::all()->sum('sub_total')),   
+                  
                 ])->columns('2')              
 
             ]);
