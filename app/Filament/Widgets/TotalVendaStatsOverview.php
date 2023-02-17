@@ -10,13 +10,13 @@ use Illuminate\Database\Eloquent\Model;
 
 class TotalVendaStatsOverview extends BaseWidget
 {
-   
-    public ?Model $record = null;  
-   
-   
+
+    public ?Model $record = null;
+
+
     protected function getCards(): array
     {
-       
+
         $mes = date('m');
         $dia = date('d');
         return [
