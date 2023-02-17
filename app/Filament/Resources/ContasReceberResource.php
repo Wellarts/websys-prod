@@ -113,7 +113,7 @@ class ContasReceberResource extends Resource
             ->filters([
                 Filter::make('Aberta')
                 ->query(fn (Builder $query): Builder => $query->where('status', false)),
-                
+                // t
                 SelectFilter::make('cliente')->relationship('cliente', 'nome') 
             ])
             ->actions([
