@@ -17,7 +17,7 @@ class Venda extends Model
         'formaPgmto_id',
         'valor_total',
         'obs',
-         
+
     ];
 
     public function cliente()
@@ -35,9 +35,9 @@ class Venda extends Model
         return $this->belongsTo(FormaPgmto::class, 'formaPgmto_id', 'id');
     }
 
-    public function itensVenda() 
+    public function itensVenda()
     {
-        return $this->hasMany(itensVenda::class);
+        return $this->hasMany(ItensVenda::class);
     }
 
     public function contasReceber()
