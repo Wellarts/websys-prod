@@ -26,11 +26,11 @@ class EditVenda extends EditRecord
     protected function getHeaderWidgets(): array
     {
 
-      
+
 
         return [
-           TotalVendaStatsOverview::class
-           
+         //  TotalVendaStatsOverview::class
+
         ];
     }
 }

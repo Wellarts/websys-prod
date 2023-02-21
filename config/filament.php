@@ -146,7 +146,7 @@ return [
            // Widgets\FilamentInfoWidget::class,
             CaixaStatsOverview::class,
             VendaStatsOverview::class,
-            VendasMesChart::class
+            VendasMesChart::class 
         ],
     ],
 
