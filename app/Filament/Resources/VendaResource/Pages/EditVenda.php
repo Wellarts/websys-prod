@@ -11,7 +11,7 @@ use Filament\Resources\Pages\EditRecord;
 class EditVenda extends EditRecord
 {
     protected static string $resource = VendaResource::class;
-
+    
     protected function getActions(): array
     {
         return [
@@ -29,7 +29,7 @@ class EditVenda extends EditRecord
 
 
         return [
-         //  TotalVendaStatsOverview::class
+           TotalVendaStatsOverview::class
 
         ];
     }

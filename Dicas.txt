@@ -1,3 +1,5 @@
+https://github.com/filamentphp/demo
+
 composer create-project laravel/laravel
 
 composer require filament/filament

@@ -6,6 +6,7 @@ use App\Filament\Resources\ContasReceberResource;
 use App\Filament\Resources\ContasReceberResource\Widgets\ReceberStatsOverview;
 use Filament\Pages\Actions;
 use Filament\Resources\Pages\ManageRecords;
+use Illuminate\Support\Str;
 
 class ManageContasRecebers extends ManageRecords
 {
@@ -27,4 +28,5 @@ class ManageContasRecebers extends ManageRecords
          //   VendasMesChart::class,
         ];
     }
+
 }

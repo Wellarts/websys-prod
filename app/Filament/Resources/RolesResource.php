@@ -22,6 +22,8 @@ class RolesResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-collection';
 
+    protected static ?string $navigationGroup = 'Segurança';
+
     public static function form(Form $form): Form
     {
         return $form
@@ -52,11 +54,11 @@ class RolesResource extends Resource
                 Tables\Actions\DeleteBulkAction::make(),
             ]);
     }
-    
+
     public static function getPages(): array
     {
         return [
             'index' => Pages\ManageRoles::route('/'),
         ];
-    }    
+    }
 }

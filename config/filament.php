@@ -7,6 +7,7 @@ use Filament\Http\Middleware\Authenticate;
 use Filament\Http\Middleware\DispatchServingFilamentEvent;
 use Filament\Http\Middleware\MirrorConfigToSubpackages;
 use Filament\Pages;
+use Filament\Resources\Resource;
 use Filament\Widgets;
 use Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse;
 use Illuminate\Cookie\Middleware\EncryptCookies;
@@ -108,7 +109,9 @@ return [
         'namespace' => 'App\\Filament\\Pages',
         'path' => app_path('Filament/Pages'),
         'register' => [
-            Pages\Dashboard::class,
+       //   Pages\Dashboard::class,
+
+
         ],
     ],
 
@@ -146,7 +149,7 @@ return [
            // Widgets\FilamentInfoWidget::class,
             CaixaStatsOverview::class,
             VendaStatsOverview::class,
-            VendasMesChart::class 
+            VendasMesChart::class
         ],
     ],
 

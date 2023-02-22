@@ -24,6 +24,8 @@ class UsersResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-collection';
 
+    protected static ?string $navigationGroup = 'Segurança';
+
     public static function form(Form $form): Form
     {
         return $form
@@ -42,9 +44,9 @@ class UsersResource extends Resource
                     Select::make('permissions')
                         ->multiple()
                         ->preload()
-                        ->relationship('permissions', 'name')        
+                        ->relationship('permissions', 'name')
 
-                   
+
                 ]);
     }
 
@@ -67,11 +69,11 @@ class UsersResource extends Resource
                 Tables\Actions\DeleteBulkAction::make(),
             ]);
     }
-    
+
     public static function getPages(): array
     {
         return [
             'index' => Pages\ManageUsers::route('/'),
         ];
-    }    
+    }
 }
