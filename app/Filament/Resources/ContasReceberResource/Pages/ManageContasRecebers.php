@@ -7,6 +7,7 @@ use App\Filament\Resources\ContasReceberResource\Widgets\ReceberStatsOverview;
 use Filament\Pages\Actions;
 use Filament\Resources\Pages\ManageRecords;
 use Illuminate\Support\Str;
+use Illuminate\Contracts\View\View;
 
 class ManageContasRecebers extends ManageRecords
 {
@@ -27,6 +28,11 @@ class ManageContasRecebers extends ManageRecords
             ReceberStatsOverview::class,
          //   VendasMesChart::class,
         ];
+    }
+
+    protected function getFooter(): View
+    {
+        return view('filament/contasReceber/footer');
     }
 
 }

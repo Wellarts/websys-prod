@@ -95,16 +95,17 @@ class ContasReceberResource extends Resource
                     ->label('Parcela Nº'),
                 Tables\Columns\TextColumn::make('data_vencimento')
                     ->date(),
-                Tables\Columns\TextColumn::make('valor_total'),
-
-                Tables\Columns\TextColumn::make('valor_parcela'),
+                Tables\Columns\TextColumn::make('valor_total')
+                    ->money('BRL'),
+                Tables\Columns\TextColumn::make('valor_parcela')
+                    ->money('BRL'),
                 Tables\Columns\IconColumn::make('status')
                     ->label('Recebido')
                     ->boolean(),
                 Tables\Columns\TextColumn::make('data_pagamento')
                     ->date(),
-                Tables\Columns\TextColumn::make('valor_recebido'),
-
+                Tables\Columns\TextColumn::make('valor_recebido')
+                    ->money('BRL'),
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime(),
                 Tables\Columns\TextColumn::make('updated_at')
@@ -113,8 +114,21 @@ class ContasReceberResource extends Resource
             ->filters([
                 Filter::make('Aberta')
                 ->query(fn (Builder $query): Builder => $query->where('status', false)),
-                
-                SelectFilter::make('cliente')->relationship('cliente', 'nome') 
+                 SelectFilter::make('cliente')->relationship('cliente', 'nome'),
+                 Tables\Filters\Filter::make('data_vencimento')
+                    ->form([
+                        Forms\Components\DatePicker::make('vencimento_de')
+                            ->label('Vencimento de:'),
+                        Forms\Components\DatePicker::make('vencimento_ate')
+                            ->label('Vencimento até:'),
+                    ])
+                    ->query(function ($query, array $data) {
+                        return $query
+                            ->when($data['vencimento_de'],
+                                fn($query) => $query->whereDate('data_vencimento', '>=', $data['vencimento_de']))
+                            ->when($data['vencimento_ate'],
+                                fn($query) => $query->whereDate('data_vencimento', '<=', $data['vencimento_ate']));
+                    })
             ])
             ->actions([
                 Tables\Actions\EditAction::make()
