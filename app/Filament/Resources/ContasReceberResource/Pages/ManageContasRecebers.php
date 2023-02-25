@@ -28,6 +28,13 @@ class ManageContasRecebers extends ManageRecords
             ReceberStatsOverview::class,
          //   VendasMesChart::class,
         ];
+    } 
+
+    public function updated($name): void
+    {
+        if (Str::of($name)->contains('tableFilter')) {
+            $this->emit('updateWidget', $this->tableFilters);
+        }
     }
 
     protected function getFooter(): View
