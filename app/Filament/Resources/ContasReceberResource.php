@@ -100,6 +100,7 @@ class ContasReceberResource extends Resource
                     ->color('success')
                      ->money('BRL'),
                 Tables\Columns\BadgeColumn::make('valor_parcela')
+                    ->alignCenter()
                     ->color('danger')
                     ->money('BRL'),
                 Tables\Columns\IconColumn::make('status')
@@ -109,6 +110,7 @@ class ContasReceberResource extends Resource
                     ->color('warning')
                     ->date(),
                 Tables\Columns\BadgeColumn::make('valor_recebido')
+                    ->alignCenter()
                     ->color('warning')
                     ->money('BRL'),
                 Tables\Columns\TextColumn::make('created_at')

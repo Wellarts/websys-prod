@@ -1,24 +1,9 @@
 
- <table @class("border border-gray-300 w-full text-right table-auto font-bold bg-stone-400")>
-
-    <tr>
-        <td></td>
-        <td class="filament-tables-cell text-2xl text-left">
-              Resumo:
-       </td>
-
-            <td class="filament-tables-cell text-bg" alignment="right">
-
-                    Valor das Parcelas: R$ {{($this->getTableRecords()->sum('valor_parcela')) }} <br>
-                    Valor Pago: R$ {{($this->getTableRecords()->sum('valor_recebido')) }} <br>
-                    ____________________ <br>
-                    Saldo: R$  {{($this->getTableRecords()->sum('valor_recebido')) - ($this->getTableRecords()->sum('valor_parcela')) }}
-
-            </td>
-            <td></td>
-
-    </tr>
-
-</table>
-
+<div class="grid grid-cols-9 border-2 text-lg">
+  <div class="col-start-1 col-span-5">TOTAL</div>
+  <div class="col-start-6 col-end-7 border-0 text-center">R$ {{($this->getTableRecords()->sum('valor_parcela')) }}</div>
+  <div class="col-start-7 col-end-9"></div>
+  <div class="col-start-9 col-end-9 col-span-2 border-0 text-center border-0"> R$ {{($this->getTableRecords()->sum('valor_pago')) }}</div>
+ 
+</div>
 

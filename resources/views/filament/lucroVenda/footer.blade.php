@@ -1,23 +1,8 @@
 
- <table @class("border border-gray-300 w-full text-right table-auto font-bold bg-stone-400")>
-
-    <tr>
-        <td></td>
-        <td class="filament-tables-cell text-2xl text-left">
-              Resumo:
-       </td>
-
-            <td class="filament-tables-cell text-bg" alignment="right">
-
-                    Valor Total Vendido: R$ {{$this->getTableRecords()->sum('valor_total')}} <br>
-                    Lucro Total: R$ {{ ($this->getTableRecords()->sum('valor_total')) - $this->getTableRecords()->sum('itens_venda_sum_valor_custo_atual') }} <br>
-
-
-            </td>
-            <td></td>
-
-    </tr>
-
-</table>
-
+<div class="grid grid-cols-6 border-2 text-lg">
+  <div class="col-start-1 col-span-4 ">TOTAL</div>
+  <div class="col-start-2 col-end-3  text-center"> R$ {{($this->getTableRecords()->sum('valor_total'))}}</div>
+  <div class="col-start-3 col-end-4  text-center"> R$ {{($this->getTableRecords()->sum('valor_total')) - $this->getTableRecords()->sum('itens_venda_sum_valor_custo_atual')}}</div>
+  
+</div>
 

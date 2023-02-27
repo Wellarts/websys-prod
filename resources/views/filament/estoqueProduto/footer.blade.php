@@ -1,24 +1,7 @@
 
- <table @class("border border-gray-300 w-full text-right table-auto font-bold bg-stone-400")>
-
-    <tr>
-        <td></td>
-        <td class="filament-tables-cell text-2xl text-left">
-              Resumo:
-       </td>
-
-            <td class="filament-tables-cell text-bg" alignment="right">
-
-                   Valor Total Compra: R$ {{$this->getTableRecords()->sum('total_compra')}} <br>
-
-
-
-
-            </td>
-            <td></td>
-
-    </tr>
-
-</table>
-
-
+<div class="grid grid-cols-8 border-2 text-lg">
+  <div class="col-start-1 col-span-5">TOTAL</div>
+  <div class="col-start-2 col-end-3 border-0 text-left"> R$ {{($this->getTableRecords()->sum('total_compra')) }}</div>
+  <div class="col-start-3 col-end-4  border-0 text-left"> R$ {{ ($this->getTableRecords()->sum('total_venda')) }}</div>
+  <div class="col-start-4 col-end-5 border-0 text-center">R$ {{($this->getTableRecords()->sum('total_lucratividade')) }}</div>
+</div>

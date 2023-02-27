@@ -43,26 +43,32 @@ class EstoqueProdutos extends Page implements HasTable
         return [
             Tables\Columns\TextColumn::make('nome'),
 
-                Tables\Columns\TextColumn::make('estoque'),
+                Tables\Columns\TextColumn::make('estoque')
+                    ->alignCenter(),
                 Tables\Columns\TextColumn::make('valor_compra')
                     ->money('BRL'),
                 Tables\Columns\TextColumn::make('lucratividade')
+                    ->alignCenter()
                     ->label('Lucratividade (%)'),
                 Tables\Columns\TextColumn::make('valor_venda')
+                    ->alignCenter()
                     ->money('BRL'),
                 Tables\Columns\BadgeColumn::make('total_compra')
+                    ->alignCenter()
                     ->getStateUsing(function (Produto $record): float {
                         return (($record->estoque * $record->valor_compra)*100);
                 })
                     ->money('BRL')
                     ->color('danger'),
                 Tables\Columns\BadgeColumn::make('total_venda')
+                    ->alignCenter()
                     ->getStateUsing(function (Produto $record): float {
                     return ($record->estoque * $record->valor_venda)*100;
                 })
                     ->money('BRL')
                     ->color('warning'),
-                Tables\Columns\BadgeColumn::make('lucratividade_real')
+                Tables\Columns\BadgeColumn::make('total_lucratividade')
+                    ->alignCenter()
                     ->getStateUsing(function (Produto $record): float {
                          return ((($record->estoque * $record->valor_venda)*100) - (($record->estoque * $record->valor_compra)*100));
                 })
@@ -73,10 +79,21 @@ class EstoqueProdutos extends Page implements HasTable
         ];
     }
 
+    
+
     protected function getFooter(): View
     {
-
-
+        $allEstoque = Produto::all();
+       
+        foreach($allEstoque as $all)
+        {
+            $all->total_compra = ($all->estoque * $all->valor_compra);
+            $all->total_venda = ($all->estoque * $all->valor_venda);
+            $all->total_lucratividade = ($all->total_venda - $all->total_compra);
+            $all->save();
+        }
+        
+           
         return view('filament/estoqueProduto/footer');
     }
 

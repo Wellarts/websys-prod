@@ -32,16 +32,20 @@ class LucroVenda extends Page implements HasTable
         return [
             Tables\Columns\TextColumn::make('id'),
                 Tables\Columns\TextColumn::make('cliente.nome'),
-                Tables\Columns\TextColumn::make('data_venda'),
+                Tables\Columns\TextColumn::make('data_venda')
+                ->alignCenter(),
                 Tables\Columns\BadgeColumn::make('itens_venda_sum_valor_custo_atual')->sum('itensVenda', 'valor_custo_atual')
+                    ->alignCenter()
                     ->label('Custo Produtos')
                     ->money('BRL')
                     ->color('danger'),
                 Tables\Columns\BadgeColumn::make('valor_total')
+                    ->alignCenter()
                     ->label('Valor da Venda')
                     ->money('BRL')
                     ->color('warning'),
                 Tables\Columns\BadgeColumn::make('lucro_venda')
+                        ->alignCenter()
                     ->label('Lucro por Venda')
                      ->money('BRL')
                      ->color('success')

@@ -15,6 +15,9 @@ class Produto extends Model
             'valor_compra',
             'lucratividade',
             'valor_venda',
+            'total_compra',
+            'total_venda',
+            'total_lucratividade'
     ];
 
     public function ProdutoFornecedor() 
