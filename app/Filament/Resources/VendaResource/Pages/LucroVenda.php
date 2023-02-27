@@ -12,7 +12,7 @@ use Filament\Tables\Filters\SelectFilter;
 use Illuminate\Database\Eloquent\Builder;
 use Filament\Forms\Components\DatePicker;
 use Filament\Tables\Filters\Filter;
-use Filament\Tables\Table;
+use Illuminate\Contracts\View\View;
 
 class LucroVenda extends Page implements HasTable
 {
@@ -41,7 +41,8 @@ class LucroVenda extends Page implements HasTable
                     ->label('Valor da Venda')
                     ->money('BRL')
                     ->color('warning'),
-                Tables\Columns\BadgeColumn::make('Lucro da Venda')
+                Tables\Columns\BadgeColumn::make('lucro_venda')
+                    ->label('Lucro por Venda')
                      ->money('BRL')
                      ->color('success')
                      ->getStateUsing(function (Venda $record): float {
@@ -58,22 +59,32 @@ class LucroVenda extends Page implements HasTable
     protected function getTableFilters(): array
      {
 
-        Tables\Filters\Filter::make('data_vencimento')
-        ->form([
-            DatePicker::make('vencimento_de')
-                ->label('Vencimento de:'),
-            DatePicker::make('vencimento_ate')
-                ->label('Vencimento até:'),
-        ])
-        ->query(function ($query, array $data) {
-            return $query
-                ->when($data['vencimento_de'],
-                    fn($query) => $query->whereDate('data_vencimento', '>=', $data['vencimento_de']))
-                ->when($data['vencimento_ate'],
-                    fn($query) => $query->whereDate('data_vencimento', '<=', $data['vencimento_ate']));
-        });
+        return [
+            SelectFilter::make('cliente')->relationship('cliente', 'nome'),
+
+           Filter::make('data_vencimento')
+            ->form([
+                DatePicker::make('venda_de')
+                    ->label('Data da Venda de:'),
+               DatePicker::make('venda_ate')
+                    ->label('Data da Venda até:'),
+            ])
+            ->query(function ($query, array $data) {
+                $query
+                    ->when($data['venda_de'],
+                        fn($query) => $query->whereDate('data_venda', '>=', $data['venda_de']))
+                    ->when($data['venda_ate'],
+                        fn($query) => $query->whereDate('data_venda', '<=', $data['venda_ate']));
+            })
+
+        ];
 
 
+     }
+
+     protected function getFooter(): View
+     {
+         return view('filament/lucroVenda/footer');
      }
 
 

@@ -95,18 +95,23 @@ class ContasPagarResource extends Resource
                 Tables\Columns\TextColumn::make('fornecedor.nome'),
                 Tables\Columns\TextColumn::make('ordem_parcela')
                     ->label('Parcela Nº'),
-                Tables\Columns\TextColumn::make('data_vencimento')
+                Tables\Columns\BadgeColumn::make('data_vencimento')
+                    ->color('danger')
                     ->date(),
-                Tables\Columns\TextColumn::make('valor_total')
+                Tables\Columns\BadgeColumn::make('valor_total')
+                    ->color('success')
                      ->money('BRL'),
-                Tables\Columns\TextColumn::make('valor_parcela')
+                Tables\Columns\BadgeColumn::make('valor_parcela')
+                    ->color('danger')
                     ->money('BRL'),
                 Tables\Columns\IconColumn::make('status')
                     ->label('Pago')
                     ->boolean(),
-                Tables\Columns\TextColumn::make('data_pagamento')
+                Tables\Columns\BadgeColumn::make('data_pagamento')
+                    ->color('warning')
                     ->date(),
-                Tables\Columns\TextColumn::make('valor_pago')
+                Tables\Columns\BadgeColumn::make('valor_pago')
+                    ->color('warning')
                     ->money('BRL'),
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime(),
