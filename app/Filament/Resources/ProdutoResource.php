@@ -52,7 +52,9 @@ class ProdutoResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('nome'),
+                Tables\Columns\TextColumn::make('nome')
+                    ->sortable()
+                    ->searchable(),
                 Tables\Columns\TextColumn::make('estoque'),
                 Tables\Columns\TextColumn::make('valor_compra')
                     ->money('BRL'),

@@ -93,11 +93,14 @@ class ContasPagarResource extends Resource
                 Tables\Columns\TextColumn::make('compra_id')
                     ->alignCenter()
                     ->label('Compra'),
-                Tables\Columns\TextColumn::make('fornecedor.nome'),
+                Tables\Columns\TextColumn::make('fornecedor.nome')
+                    ->sortable()
+                    ->searchable(),
                 Tables\Columns\TextColumn::make('ordem_parcela')
                     ->alignCenter()
                     ->label('Parcela Nº'),
                 Tables\Columns\BadgeColumn::make('data_vencimento')
+                    ->sortable()
                     ->alignCenter()
                     ->color('danger')
                     ->date(),

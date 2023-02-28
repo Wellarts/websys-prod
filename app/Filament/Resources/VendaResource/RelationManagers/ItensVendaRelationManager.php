@@ -59,8 +59,17 @@ class ItensVendaRelationManager extends RelationManager
                     ->required()
                     ->reactive()
                     ->afterStateUpdated(function (Closure $get, Closure $set) {
-                        $set('sub_total', (($get('qtd') * $get('valor_venda')) + (float)$get('acres_desc')));
-                    }),
+                        
+                        
+                           $set('sub_total', (($get('qtd') * $get('valor_venda')) + (float)$get('acres_desc')));
+                           $set('total_custo_atual', $get('valor_custo_atual') * $get('qtd'));
+                                
+                        
+
+                    }
+
+                    
+                ),                       
                 
                 Forms\Components\TextInput::make('acres_desc')
                     ->label('Desconto/Acréscimo')
@@ -72,6 +81,7 @@ class ItensVendaRelationManager extends RelationManager
                     ->disabled()
                     ->label('SubTotal'),
                 Forms\Components\Hidden::make('valor_custo_atual'),
+                Forms\Components\Hidden::make('total_custo_atual'),
                     
             ]);
     }
@@ -80,7 +90,9 @@ class ItensVendaRelationManager extends RelationManager
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('produto.nome'),
+                Tables\Columns\TextColumn::make('produto.nome')
+                    ->sortable()
+                    ->searchable(),
                 Tables\Columns\TextColumn::make('qtd'),
                 Tables\Columns\TextColumn::make('valor_venda')
                 ->money('BRL'),
@@ -96,13 +108,14 @@ class ItensVendaRelationManager extends RelationManager
             ->headerActions([
                 Tables\Actions\CreateAction::make()
                 ->label('Adicionar')
-                ->after(function ($data) {
+                ->after(function ($data, $record) {
                     $produto = Produto::find($data['produto_id']);
-                    $venda = Venda::find($data['venda_id']);
                     $produto->estoque -= $data['qtd'];
+                    $venda = Venda::find($data['venda_id']);
                     $venda->valor_total += $data['sub_total'];
                     $venda->save();
                     $produto->save();
+                   
 
                 })
                 

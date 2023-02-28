@@ -73,7 +73,9 @@ class ItensCompraRelationManager extends RelationManager
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('produto.nome'),
+                Tables\Columns\TextColumn::make('produto.nome')
+                    ->sortable()
+                    ->searchable(),
                 Tables\Columns\TextColumn::make('qtd'),
                 Tables\Columns\TextColumn::make('valor_compra')
                     ->money('BRL'),

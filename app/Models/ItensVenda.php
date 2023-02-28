@@ -16,6 +16,7 @@ class ItensVenda extends Model
         'acres_desc',
         'sub_total',
         'valor_custo_atual',
+        'total_custo_atual'
     ];
 
     public function venda()

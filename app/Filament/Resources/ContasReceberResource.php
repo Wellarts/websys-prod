@@ -90,10 +90,13 @@ class ContasReceberResource extends Resource
             ->columns([
                 Tables\Columns\TextColumn::make('venda_id')
                     ->label('Compra'),
-                Tables\Columns\TextColumn::make('cliente.nome'),
+                Tables\Columns\TextColumn::make('cliente.nome')
+                    ->sortable()
+                    ->searchable(),
                 Tables\Columns\TextColumn::make('ordem_parcela')
                     ->label('Parcela Nº'),
-                    Tables\Columns\BadgeColumn::make('data_vencimento')
+                Tables\Columns\BadgeColumn::make('data_vencimento')
+                    ->sortable()
                     ->color('danger')
                     ->date(),
                 Tables\Columns\BadgeColumn::make('valor_total')

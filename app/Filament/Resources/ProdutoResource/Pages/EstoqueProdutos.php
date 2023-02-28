@@ -10,6 +10,7 @@ use Filament\Tables;
 use Filament\Tables\Columns\ColorColumn;
 use Filament\Tables\Concerns\InteractsWithTable;
 use Filament\Tables\Contracts\HasTable;
+use Filament\Tables\Filters\SelectFilter;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Contracts\View\View;
 
@@ -41,8 +42,10 @@ class EstoqueProdutos extends Page implements HasTable
     protected function getTableColumns(): array
     {
         return [
-            Tables\Columns\TextColumn::make('nome'),
-
+                Tables\Columns\TextColumn::make('nome')
+                    ->label('Produto')
+                    ->sortable()
+                    ->searchable(),
                 Tables\Columns\TextColumn::make('estoque')
                     ->alignCenter(),
                 Tables\Columns\TextColumn::make('valor_compra')
@@ -78,6 +81,8 @@ class EstoqueProdutos extends Page implements HasTable
 
         ];
     }
+
+    
 
     
 

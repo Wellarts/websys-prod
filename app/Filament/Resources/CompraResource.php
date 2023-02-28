@@ -50,8 +50,13 @@ class CompraResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('fornecedor.nome'),
+                Tables\Columns\TextColumn::make('id')
+                    ->sortable(),
+                Tables\Columns\TextColumn::make('fornecedor.nome')
+                    ->sortable()
+                    ->searchable(),
                 Tables\Columns\TextColumn::make('data_compra')
+                    ->searchable()
                     ->date(),
                 Tables\Columns\TextColumn::make('valor_total')
                     ->money('BRL'),

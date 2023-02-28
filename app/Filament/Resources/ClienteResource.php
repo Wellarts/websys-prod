@@ -66,7 +66,9 @@ class ClienteResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('nome'),
+                Tables\Columns\TextColumn::make('nome')
+                ->sortable()
+                ->searchable(),
                 Tables\Columns\TextColumn::make('endereco')
                     ->label('Endereço'),
                 Tables\Columns\TextColumn::make('estado.nome')

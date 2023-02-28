@@ -58,9 +58,11 @@ class FluxoCaixaResource extends Resource
                     }
              
                     return 'danger';
-                }),
+                })
+                ->sortable(),                
                 Tables\Columns\TextColumn::make('valor'),
-                Tables\Columns\TextColumn::make('obs'),
+                Tables\Columns\TextColumn::make('obs')
+                    ->searchable(),
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime(),
                 Tables\Columns\TextColumn::make('updated_at')

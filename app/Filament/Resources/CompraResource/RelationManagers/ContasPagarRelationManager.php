@@ -126,10 +126,13 @@ class ContasPagarRelationManager extends RelationManager
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('fornecedor.nome'),
+                Tables\Columns\TextColumn::make('fornecedor.nome')
+                    ->sortable()
+                    ->searchable(),
                 Tables\Columns\TextColumn::make('ordem_parcela')
                     ->label('Parcela Nº'),
                 Tables\Columns\TextColumn::make('data_vencimento')
+                    ->sortable()
                     ->date(),
                 Tables\Columns\TextColumn::make('valor_total'),
                 

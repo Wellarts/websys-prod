@@ -31,14 +31,17 @@ class LucroVenda extends Page implements HasTable
     {
         return [
             Tables\Columns\TextColumn::make('id'),
-                Tables\Columns\TextColumn::make('cliente.nome'),
+                Tables\Columns\TextColumn::make('cliente.nome')
+                    ->sortable()
+                    ->searchable(),
                 Tables\Columns\TextColumn::make('data_venda')
-                ->alignCenter(),
-                Tables\Columns\BadgeColumn::make('itens_venda_sum_valor_custo_atual')->sum('itensVenda', 'valor_custo_atual')
+                    ->sortable()
+                    ->alignCenter(),
+                Tables\Columns\BadgeColumn::make('itens_venda_sum_total_custo_atual')->sum('itensVenda', 'total_custo_atual')
                     ->alignCenter()
                     ->label('Custo Produtos')
                     ->money('BRL')
-                    ->color('danger'),
+                    ->color('danger'),                
                 Tables\Columns\BadgeColumn::make('valor_total')
                     ->alignCenter()
                     ->label('Valor da Venda')
@@ -50,12 +53,9 @@ class LucroVenda extends Page implements HasTable
                      ->money('BRL')
                      ->color('success')
                      ->getStateUsing(function (Venda $record): float {
-                        $custoProdutos = $record->itensVenda()->sum('valor_custo_atual');
+                        $custoProdutos = $record->itensVenda()->sum('total_custo_atual');
                         return ($record->valor_total - $custoProdutos)*100;
                     })
-
-
-
 
         ];
     }
@@ -65,8 +65,8 @@ class LucroVenda extends Page implements HasTable
 
         return [
             SelectFilter::make('cliente')->relationship('cliente', 'nome'),
-
-           Filter::make('data_vencimento')
+            
+            Filter::make('data_vencimento')
             ->form([
                 DatePicker::make('venda_de')
                     ->label('Data da Venda de:'),

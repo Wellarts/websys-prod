@@ -61,8 +61,13 @@ class VendaResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('cliente.nome'),
+                Tables\Columns\TextColumn::make('id')
+                    ->sortable(),
+                Tables\Columns\TextColumn::make('cliente.nome')
+                    ->sortable()
+                    ->searchable(),
                 Tables\Columns\TextColumn::make('data_venda')
+                    ->sortable()
                     ->label('Data da Venda')
                     ->date(),
                 Tables\Columns\TextColumn::make('funcionario.nome')
