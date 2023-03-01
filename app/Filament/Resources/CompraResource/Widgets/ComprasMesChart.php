@@ -1,25 +1,24 @@
 <?php
 
-namespace App\Filament\Resources\VendaResource\Widgets;
+namespace App\Filament\Resources\CompraResource\Widgets;
 
-use App\Models\Venda;
+use App\Models\Compra;
 use Filament\Widgets\LineChartWidget;
 use Flowframe\Trend\Trend;
 use Flowframe\Trend\TrendValue;
 
-class VendasMesChart extends LineChartWidget
+class ComprasMesChart extends LineChartWidget
 {
     protected static ?string $heading = 'Chart';
 
-    
     protected function getHeading(): string
     {
-        return 'Vendas Mensal';
+        return 'Compras Mensal';
     }
 
     protected function getData(): array
     {
-        $data = Trend::model(Venda::class)
+        $data = Trend::model(Compra::class)
         ->between(
             start: now()->startOfYear(),
             end: now()->endOfYear(),
@@ -30,7 +29,7 @@ class VendasMesChart extends LineChartWidget
         return [
             'datasets' => [
                 [
-                    'label' => 'Vendas Mensal',
+                    'label' => 'Compras Mensal',
                     'data' => $data->map(fn (TrendValue $value) => $value->aggregate),
                 ],
             ],

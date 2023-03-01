@@ -2,12 +2,13 @@
 
 namespace App\Filament\Pages;
 
-use App\Filament\Resources\FluxoCaixaResource\Widgets\CaixaStatsOverview;
+use App\Filament\Resources\CompraResource\Widgets\ComprasMesChart;
 use App\Filament\Resources\VendaResource\Widgets\VendasMesChart;
-use App\Filament\Resources\VendaResource\Widgets\VendaStatsOverview;
-use App\Filament\Widgets\TotalVendaStatsOverview;
+use App\Filament\Widgets\PagarHojeStatsOverview;
+use App\Filament\Widgets\ReceberHojeStatsOverview;
 use Filament\Pages\Page;
 use Filament\Widgets\AccountWidget;
+
 
 class Dashboard extends Page
 {
@@ -22,10 +23,11 @@ class Dashboard extends Page
 
         return [
             AccountWidget::class,
-           // Widgets\FilamentInfoWidget::class,
-            CaixaStatsOverview::class,
-            VendaStatsOverview::class,
-            VendasMesChart::class
+            PagarHojeStatsOverview::class,
+            ReceberHojeStatsOverview::class,
+            VendasMesChart::class,
+            ComprasMesChart::class,
+           
 
         ];
     }

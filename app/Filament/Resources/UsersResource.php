@@ -22,7 +22,7 @@ class UsersResource extends Resource
 {
     protected static ?string $model = User::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-collection';
+    protected static ?string $navigationIcon = 'heroicon-s-user-group';
 
     protected static ?string $navigationGroup = 'Segurança';
 
