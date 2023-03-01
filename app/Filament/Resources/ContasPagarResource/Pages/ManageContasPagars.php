@@ -8,6 +8,7 @@ use Filament\Pages\Actions;
 use Filament\Resources\Pages\ManageRecords;
 use Illuminate\Contracts\View\View;
 
+
 class ManageContasPagars extends ManageRecords
 {
     protected static string $resource = ContasPagarResource::class;

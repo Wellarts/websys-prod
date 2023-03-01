@@ -19,6 +19,7 @@ use Filament\Tables\Filters\SelectFilter;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 
+
 class ContasPagarResource extends Resource
 {
     protected static ?string $model = ContasPagar::class;

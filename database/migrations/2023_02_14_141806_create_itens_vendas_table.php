@@ -21,6 +21,7 @@ return new class extends Migration
             $table->decimal('acres_desc',10,2);
             $table->decimal('sub_total',10,2);
             $table->decimal('valor_custo_atual',10,2);
+            $table->decimal('total_custo_atual',10,2);
             $table->timestamps();
         });
     }

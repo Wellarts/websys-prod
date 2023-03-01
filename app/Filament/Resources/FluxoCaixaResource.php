@@ -62,6 +62,7 @@ class FluxoCaixaResource extends Resource
                 ->sortable(),                
                 Tables\Columns\TextColumn::make('valor'),
                 Tables\Columns\TextColumn::make('obs')
+                    ->label('Descrição')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime(),
