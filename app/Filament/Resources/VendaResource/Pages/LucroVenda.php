@@ -30,11 +30,14 @@ class LucroVenda extends Page implements HasTable
     protected function getTableColumns(): array
     {
         return [
-            Tables\Columns\TextColumn::make('id'),
+            Tables\Columns\TextColumn::make('id')
+                    ->alignCenter()
+                    ->label('Venda'),
                 Tables\Columns\TextColumn::make('cliente.nome')
                     ->sortable()
                     ->searchable(),
                 Tables\Columns\TextColumn::make('data_venda')
+                    ->date('d/m/Y')
                     ->sortable()
                     ->alignCenter(),
                 Tables\Columns\BadgeColumn::make('itens_venda_sum_total_custo_atual')->sum('itensVenda', 'total_custo_atual')

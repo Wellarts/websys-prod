@@ -38,6 +38,8 @@ class PermissionsResource extends Resource
         return $table
             ->columns([
                 TextColumn::make('name')
+                ->sortable()
+                ->searchable(),
             ])
             ->filters([
                 //

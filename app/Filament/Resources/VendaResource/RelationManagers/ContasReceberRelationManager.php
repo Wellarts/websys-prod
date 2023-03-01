@@ -45,7 +45,7 @@ class ContasReceberRelationManager extends RelationManager
             ->required(),
         Forms\Components\TextInput::make('valor_total')
             ->label('Valor Total')
-            ->default((function ($livewire): int {
+            ->default((function ($livewire): float {
             return $livewire->ownerRecord->valor_total;
         }))
             ->disabled()
@@ -106,11 +106,11 @@ class ContasReceberRelationManager extends RelationManager
                          }      
              ),
         Forms\Components\TextInput::make('valor_recebido')
-            ->default((function ($livewire): int {
+            ->default((function ($livewire): float {
                     return $livewire->ownerRecord->valor_total;
             })),
         Forms\Components\TextInput::make('valor_parcela')
-            ->default((function ($livewire): int {
+            ->default((function ($livewire): float {
                     return $livewire->ownerRecord->valor_total;
             }))
             ->required()
@@ -154,7 +154,7 @@ class ContasReceberRelationManager extends RelationManager
             ])
             ->headerActions([
                 Tables\Actions\CreateAction::make()
-                ->label('Adicionar')
+                ->label('Lançar Recebimento')
                 ->after(function ($data, $record) {
                     if($record->parcelas > 1)
                     {
@@ -172,7 +172,7 @@ class ContasReceberRelationManager extends RelationManager
                                             'data_vencimento' => $dataVencimentos,
                                             'valor_recebido' => 0.00,
                                             'status' => 0,
-                                            'obs' => 'Venda...',
+                                            'obs' => $data['obs'],
                                             'valor_parcela' => $valor_parcela,
                                             ];
                                 ContasReceber::create($parcelas);

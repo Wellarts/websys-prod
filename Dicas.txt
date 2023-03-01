@@ -26,6 +26,10 @@ php artisan make:filament-resource Fornecedor --gerenate --simple
 
 composer require codeat3/blade-fluentui-system-icons - Pacote de icones
 
+php artisan cache:forget spatie.permission.cache - Limpar cache das permissões
+
+
+
 
 
 
