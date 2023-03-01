@@ -182,7 +182,7 @@ class ContasReceberRelationManager extends RelationManager
                     else
                     {
                         $addFluxoCaixa = [
-                            'valor' => ($record->valor_total * -1),
+                            'valor' => ($record->valor_total),
                             'tipo'  => 'CREDITO',
                             'obs'   => 'Recebido da venda nº: '.$record->venda_id. '',
                         ];
@@ -201,7 +201,7 @@ class ContasReceberRelationManager extends RelationManager
                     if($record->status = 1)
                     {
                         $addFluxoCaixa = [
-                            'valor' => ($record->valor_parcela * -1),
+                            'valor' => ($record->valor_parcela),
                             'tipo'  => 'CREDITO',
                             'obs'   => 'Recebido da venda nº: '.$record->venda_id. '',
                         ];
