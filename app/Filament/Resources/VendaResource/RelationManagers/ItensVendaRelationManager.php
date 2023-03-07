@@ -44,12 +44,12 @@ class ItensVendaRelationManager extends RelationManager
                             $set('valor_venda', $produto->valor_venda);
                             $set('valor_custo_atual', $produto->valor_compra);
                             $set('sub_total', (($get('qtd') * $get('valor_venda')) + (float)$get('acres_desc')));
-                                
+
                         }
 
                     }
 
-                    
+
                 ),
                 Forms\Components\TextInput::make('valor_venda')
                     ->required()
@@ -58,19 +58,29 @@ class ItensVendaRelationManager extends RelationManager
                     ->default('1')
                     ->required()
                     ->reactive()
-                    ->afterStateUpdated(function (Closure $get, Closure $set) {
-                        
-                        
+                    ->afterStateUpdated(function ($state, Closure $get, Closure $set) {
                            $set('sub_total', (($get('qtd') * $get('valor_venda')) + (float)$get('acres_desc')));
                            $set('total_custo_atual', $get('valor_custo_atual') * $get('qtd'));
-                                
-                        
+
+                                   $produto = Produto::find($state);
+                                   if($produto) {
+                                        if($produto->estoque < $get('qtd'))
+                                        {
+                                            dd('estoque indisponivel');
+                                        }
+                                        else
+                                        {
+                                            dd('estoque disponivel');
+                                        };
+                                   }
+
+
 
                     }
 
-                    
-                ),                       
-                
+
+                ),
+
                 Forms\Components\TextInput::make('acres_desc')
                     ->label('Desconto/Acréscimo')
                     ->reactive()
@@ -82,7 +92,7 @@ class ItensVendaRelationManager extends RelationManager
                     ->label('SubTotal'),
                 Forms\Components\Hidden::make('valor_custo_atual'),
                 Forms\Components\Hidden::make('total_custo_atual'),
-                    
+
             ]);
     }
 
@@ -115,15 +125,15 @@ class ItensVendaRelationManager extends RelationManager
                     $venda->valor_total += $data['sub_total'];
                     $venda->save();
                     $produto->save();
-                   
+
 
                 })
-                
+
             ])
             ->actions([
                 Tables\Actions\EditAction::make()
                 ->before(function ($data) {
-                   
+
                      $produto = Produto::find($data['produto_id']);
                      $idItemCompra = ItensVenda::find($data['id']);
                      $venda = Venda::find($data['venda_id']);
@@ -131,8 +141,8 @@ class ItensVendaRelationManager extends RelationManager
                      $venda->valor_total += ($data['sub_total'] - $idItemCompra->sub_total);
                      $venda->save();
                      $produto->save();
-                     
-                     
+
+
                  }),
                 Tables\Actions\DeleteAction::make()
                  ->before(function ($data, $record) {
@@ -147,7 +157,7 @@ class ItensVendaRelationManager extends RelationManager
             ->bulkActions([
                 Tables\Actions\DeleteBulkAction::make(),
             ]);
-    }  
-    
-    
+    }
+
+
 }
