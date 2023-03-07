@@ -30,6 +30,8 @@ class EstoqueContabil extends Page  implements HasTable
 
     protected static ?string $navigationLabel = 'Estoque Contábil';
 
+    
+
 
     protected static function shouldRegisterNavigation(): bool
     {

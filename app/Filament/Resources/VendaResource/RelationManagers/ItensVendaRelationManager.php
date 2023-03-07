@@ -14,6 +14,8 @@ use Filament\Tables;
 use Filament\Widgets\Widget;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Filament\Notifications\Notification; 
+use Livewire\Component;
 
 class ItensVendaRelationManager extends RelationManager
 {
@@ -40,47 +42,32 @@ class ItensVendaRelationManager extends RelationManager
                     ->label('Produto')
                     ->afterStateUpdated(function ($state, callable $set, Closure $get,) {
                         $produto = Produto::find($state);
+                       
                         if($produto) {
                             $set('valor_venda', $produto->valor_venda);
                             $set('valor_custo_atual', $produto->valor_compra);
                             $set('sub_total', (($get('qtd') * $get('valor_venda')) + (float)$get('acres_desc')));
-
+                            $set('estoque_atual', $produto->estoque);
                         }
-
                     }
-
-
                 ),
-                Forms\Components\TextInput::make('valor_venda')
-                    ->required()
+                Forms\Components\TextInput::make('estoque_atual')
+                    ->hidden(fn (string $context): bool => $context === 'edit')
                     ->disabled(),
+                
                 Forms\Components\TextInput::make('qtd')
                     ->default('1')
                     ->required()
                     ->reactive()
-                    ->afterStateUpdated(function ($state, Closure $get, Closure $set) {
+                    ->afterStateUpdated(function ($state, callable $set, Closure $get,) {
                            $set('sub_total', (($get('qtd') * $get('valor_venda')) + (float)$get('acres_desc')));
                            $set('total_custo_atual', $get('valor_custo_atual') * $get('qtd'));
-
-                                   $produto = Produto::find($state);
-                                   if($produto) {
-                                        if($produto->estoque < $get('qtd'))
-                                        {
-                                            dd('estoque indisponivel');
-                                        }
-                                        else
-                                        {
-                                            dd('estoque disponivel');
-                                        };
-                                   }
-
-
-
+                                
                     }
-
-
                 ),
-
+                Forms\Components\TextInput::make('valor_venda')
+                    ->required()
+                    ->disabled(),
                 Forms\Components\TextInput::make('acres_desc')
                     ->label('Desconto/Acréscimo')
                     ->reactive()
@@ -92,7 +79,7 @@ class ItensVendaRelationManager extends RelationManager
                     ->label('SubTotal'),
                 Forms\Components\Hidden::make('valor_custo_atual'),
                 Forms\Components\Hidden::make('total_custo_atual'),
-
+   
             ]);
     }
 

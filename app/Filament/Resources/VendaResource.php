@@ -110,7 +110,7 @@ class VendaResource extends Resource
             'index' => Pages\ListVendas::route('/'),
             'create' => Pages\CreateVenda::route('/create'),
             'edit' => Pages\EditVenda::route('/{record}/edit'),
-            'lucro' => Pages\LucroVenda::route('/lucro'),
+            
         ];
     }
 
