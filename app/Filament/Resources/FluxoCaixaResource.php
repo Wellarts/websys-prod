@@ -24,25 +24,27 @@ class FluxoCaixaResource extends Resource
 
     protected static ?string $navigationGroup = 'Financeiro';
 
+    
+
     public static function form(Form $form): Form
     {
         return $form
         ->schema([
-            
+
              Forms\Components\Select::make('tipo')
                  ->options([
                      'CREDITO' => 'CREDITO',
                      'DEBITO' => 'DEBITO',
-                 ])   
+                 ])
                  ->required(),
-                
+
              Forms\Components\TextInput::make('valor')
                  ->required(),
-             
+
              Forms\Components\Textarea::make('obs')
                  ->columnSpanFull()
                  ->required(),
-            
+
          ]);
 
     }
@@ -56,10 +58,10 @@ class FluxoCaixaResource extends Resource
                     if ($state === 'CREDITO') {
                         return 'success';
                     }
-             
+
                     return 'danger';
                 })
-                ->sortable(),                
+                ->sortable(),
                 Tables\Columns\TextColumn::make('valor'),
                 Tables\Columns\TextColumn::make('obs')
                     ->label('Descrição')
@@ -80,14 +82,14 @@ class FluxoCaixaResource extends Resource
                 Tables\Actions\DeleteBulkAction::make(),
             ]);
     }
-    
+
     public static function getPages(): array
     {
         return [
             'index' => Pages\ManageFluxoCaixas::route('/'),
         ];
-    } 
-    
+    }
+
     protected function getRedirectUrl(): string
 {
     return $this->getResource()::getUrl('index');

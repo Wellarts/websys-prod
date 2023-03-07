@@ -18,12 +18,12 @@ class Dashboard extends Page
 
     protected static string $view = 'filament.pages.dashboard';
 
-   
+
 
     protected function getHeaderWidgets(): array
     {
-       
-      
+
+        
 
         return [
             AccountWidget::class,
@@ -31,7 +31,7 @@ class Dashboard extends Page
             ReceberHojeStatsOverview::class,
             VendasMesChart::class,
             ComprasMesChart::class,
-           
+
 
         ];
     }

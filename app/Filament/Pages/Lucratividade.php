@@ -1,55 +1,56 @@
 <?php
 
-namespace App\Filament\Resources\VendaResource\Pages;
-
+namespace App\Filament\Pages;
 
 use App\Filament\Resources\VendaResource;
 use App\Models\Venda;
-use Filament\Tables;
-use Filament\Resources\Pages\Page;
+use Filament\Pages\Page;
 use Filament\Tables\Concerns\InteractsWithTable;
 use Filament\Tables\Contracts\HasTable;
+use Illuminate\Contracts\Database\Eloquent\Builder;
+use Filament\Tables;
 use Filament\Tables\Filters\SelectFilter;
-use Illuminate\Database\Eloquent\Builder;
 use Filament\Forms\Components\DatePicker;
 use Filament\Tables\Filters\Filter;
 use Illuminate\View\View;
 
-class LucroVenda extends Page implements HasTable
+
+class Lucratividade extends Page implements HasTable
 {
+
     use InteractsWithTable;
-
-
 
     protected static string $resource = VendaResource::class;
 
-
-
-    protected static string $view = 'filament.resources.venda-resource.pages.lucro-venda';
-
     protected static ?string $navigationIcon = 'heroicon-o-document-text';
 
+    protected static string $view = 'filament.pages.lucratividade';
 
+    protected static ?string $navigationGroup = 'Consultas';
+
+   
     protected static function shouldRegisterNavigation(): bool
     {
-        return true;
-    }
+        /** @var \App\Models\User */
+        $authUser =  auth()->user();
 
+        if($authUser->hasRole('Administrador'))
+        {
+              return true;
+        }
+        else
+        {
+            return false;
+        }
+
+
+    }
 
     protected function getTableQuery(): Builder|String
     {
-            /** @var \App\Models\User */
-            $authUser =  auth()->user();
-           // dd($authUser);
-            if($authUser->hasRole('Admi')) {
+
 
                      return Venda::query();
-                }
-
-
-                return Venda::query();
-
-
 
     }
 
@@ -95,7 +96,6 @@ class LucroVenda extends Page implements HasTable
 
     protected function getTableFilters(): array
      {
-
         return [
             SelectFilter::make('cliente')->relationship('cliente', 'nome'),
 
@@ -124,24 +124,4 @@ class LucroVenda extends Page implements HasTable
 
             return view('filament/lucroVenda/footer');
      }
-
-     protected function getRedirectUrl(): string
-        {
-            return $this->getResource()::getUrl('index');
-        }
-
-     public function mount(): bool
-    {
-
-         /** @var \App\Models\User */
-        $authUser =  auth()->user();
-        if($authUser->hasRole('Administrador')) {
-          //  dd($authUser->hasRole('Administrador'));
-        }
-        return $this->shouldRegisterNavigation();
-    }
-
-
-
 }
-
