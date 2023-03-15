@@ -55,6 +55,9 @@ class FornecedorResource extends Resource
                 })
                 ->reactive(),
             Forms\Components\TextInput::make('telefone')
+                ->minLength(11)
+                ->maxLength(11)
+                ->required()
                 ->mask(fn (Forms\Components\TextInput\Mask $mask) => $mask->pattern('(00)00000-0000)'))
                 ->tel()
                 ->maxLength(255),
@@ -78,7 +81,8 @@ class FornecedorResource extends Resource
                 Tables\Columns\TextColumn::make('cidade.nome')
                     ->label('Cidade'),
                 Tables\Columns\TextColumn::make('telefone')
-                    ->label('Telefone'),
+                    ->formatStateUsing(fn (string $state) => vsprintf('(%d%d)%d%d%d%d%d-%d%d%d%d', str_split($state)))
+                     ->label('Telefone'),
                 Tables\Columns\TextColumn::make('email')
                     ->label('Email'),
                 Tables\Columns\TextColumn::make('created_at')

@@ -89,7 +89,7 @@ class ContasReceberResource extends Resource
         return $table
             ->columns([
                 Tables\Columns\TextColumn::make('venda_id')
-                    ->label('Compra'),
+                    ->label('Venda'),
                 Tables\Columns\TextColumn::make('cliente.nome')
                     ->sortable()
                     ->searchable(),

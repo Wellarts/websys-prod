@@ -48,6 +48,7 @@ class ItensVendaRelationManager extends RelationManager
                             $set('valor_custo_atual', $produto->valor_compra);
                             $set('sub_total', (($get('qtd') * $get('valor_venda')) + (float)$get('acres_desc')));
                             $set('estoque_atual', $produto->estoque);
+                            $set('total_custo_atual', $get('valor_custo_atual') * $get('qtd'));
                         }
                     }
                 ),

@@ -10,5 +10,10 @@ class CreateProduto extends CreateRecord
 {
     protected static string $resource = ProdutoResource::class;
 
+    protected function getRedirectUrl(): string
+    {
+        return $this->getResource()::getUrl('index');
+    }
+
     
 }

@@ -87,7 +87,7 @@ class ContasPagarRelationManager extends RelationManager
                 ->required(),
             Forms\Components\Toggle::make('status')
                 ->default('true')
-                ->label('Recebido')
+                ->label('Pago')
                 ->required()
                 ->reactive()
                 ->afterStateUpdated(function (Closure $get, Closure $set) {

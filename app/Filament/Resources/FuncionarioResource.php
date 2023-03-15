@@ -54,8 +54,12 @@ class FuncionarioResource extends Resource
                     })
                     ->reactive(),
                 Forms\Components\TextInput::make('telefone')
+                    ->minLength(11)
+                    ->maxLength(11)
+                    ->required()
                     ->mask(fn (Forms\Components\TextInput\Mask $mask) => $mask->pattern('(00)00000-0000)'))
                     ->tel()
+                    ->required()
                     ->maxLength(255),
                 Forms\Components\TextInput::make('email')
                     ->email()
@@ -77,6 +81,7 @@ class FuncionarioResource extends Resource
                 Tables\Columns\TextColumn::make('cidade.nome')
                     ->label('Cidade'),
                 Tables\Columns\TextColumn::make('telefone')
+                    ->formatStateUsing(fn (string $state) => vsprintf('(%d%d)%d%d%d%d%d-%d%d%d%d', str_split($state)))
                     ->label('Telefone'),
                 Tables\Columns\TextColumn::make('email')
                     ->label('Email'),
