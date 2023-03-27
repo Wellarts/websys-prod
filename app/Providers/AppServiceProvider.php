@@ -2,9 +2,11 @@
 
 namespace App\Providers;
 
+use App\Models\Config;
 use App\Models\User;
 use Filament\Facades\Filament;
 use Filament\Navigation\NavigationItem;
+use Filament\Notifications\Notification;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\ServiceProvider;
 use Spatie\Permission\Contracts\Role;
@@ -34,48 +36,26 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-       /*      Filament::serving(function () {
-                    Filament::registerNavigationItems([
-                        NavigationItem::make('Lucros por Venda')
-                            ->url(route('filament.resources.vendas.lucro'))
-                            ->icon('heroicon-o-presentation-chart-line')
-                            ->activeIcon('heroicon-s-presentation-chart-line')
-                            ->group('Consultas')
-                            ->sort(3),
-                    ]);
-                });
-/*
+
         Filament::serving(function () {
-            Filament::registerNavigationItems([
-                NavigationItem::make('Estoque Financeiro')
-                    ->url(route('filament.resources.produtos.estoque'))
-                    ->icon('heroicon-o-presentation-chart-line')
-                    ->activeIcon('heroicon-s-presentation-chart-line')
-                    ->group('Consultas')
-                    ->sort(3),
-            ]);
+
+            $Expira = Config::find(1);
+            $validade = $Expira->validade;
+            $hoje = date('Y-m-d');
+
+            if($validade <= $hoje)
+                {
+                    Notification::make()
+                    ->title('LICENÇA EXPIRADA!')
+                    ->danger()
+                    //->persistent()
+                    ->send();
+
+                    Auth::logout();
+                    return to_route('filament.auth.login')->with('Unauthorized');
+                }
+
         });
-
-
-          /** @var \App\Models\User */
-     /*       $authUser =  auth()->user();
-         //   dd($authUser);
-
-            if($authUser->hasRole('Administrador')) {
-                Filament::serving(function () {
-                    Filament::registerUserMenuItems([
-                        NavigationItem::make('Estoque Financeiro TESTE')
-                            ->url(route('filament.resources.produtos.estoque'))
-                            ->icon('heroicon-o-presentation-chart-line')
-                            ->activeIcon('heroicon-s-presentation-chart-line')
-                            ->group('Consultas')
-                            ->sort(3),
-                    ]);
-                });
-
-            } */
-
-
 
    }
 
