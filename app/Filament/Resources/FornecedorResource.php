@@ -13,6 +13,8 @@ use Filament\Resources\Table;
 use Filament\Tables;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use App\Forms\Components\CpfCnpj;
+
 
 class FornecedorResource extends Resource
 {
@@ -31,11 +33,9 @@ class FornecedorResource extends Resource
                 Forms\Components\TextInput::make('nome')
                 ->required()
                 ->maxLength(255),
-            Forms\Components\TextInput::make('cpf_cnpj')
+            CpfCnpj::make('cpf_cnpj')
                 ->label('CPF/CNPJ')
-               // ->placeholder('000.000.000-00 ou 000.000.000/0000-00')
-                //->mask(fn (Forms\Components\TextInput\Mask $mask) => $mask->pattern('000.000.000-00'))
-                ->maxLength(50),
+                ->rule('cpf_ou_cnpj'),
             Forms\Components\Textarea::make('endereco')
                 ->label('Endereço'),
             Forms\Components\Select::make('estado_id')
