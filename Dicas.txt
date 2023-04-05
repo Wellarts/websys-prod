@@ -31,6 +31,9 @@ php artisan cache:forget spatie.permission.cache - Limpar cache das permissões
  protected int | string | array $columnSpan = 'full'; Mudar no arquivo C:\laragon\www\websys-prod\vendor\filament\filament\src\Widgets\AccountWidget.php
 
 
+ https://filamentphp.com/tricks/brazilian-cpfcnpj-field - MASCARA E VALIDADOR DE CPF E CNPJ
+
+
 
 
 
