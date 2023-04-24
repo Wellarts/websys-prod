@@ -38,6 +38,7 @@ class ItensCompraRelationManager extends RelationManager
                 Forms\Components\Select::make('produto_id')
                     ->options(Produto::all()->pluck('nome', 'id')->toArray())
                     ->disabled(fn ($context) => $context == 'edit')
+                    ->searchable()
                     ->reactive()
                     ->required()
                     ->label('Produto')
