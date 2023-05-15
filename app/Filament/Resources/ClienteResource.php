@@ -20,7 +20,7 @@ use App\Forms\Components\CpfCnpj;
 
 class ClienteResource extends Resource
 {
-    
+
     protected static ?string $model = Cliente::class;
 
     protected static ?string $navigationIcon = 'heroicon-s-user-add';
@@ -82,10 +82,10 @@ class ClienteResource extends Resource
                 Tables\Columns\TextColumn::make('cidade.nome')
                     ->label('Cidade'),
                 Tables\Columns\TextColumn::make('telefone')
-                   
+
                     ->formatStateUsing(fn (string $state) => vsprintf('(%d%d)%d%d%d%d%d-%d%d%d%d', str_split($state)))
                     ->label('Telefone'),
-                    
+
                 Tables\Columns\TextColumn::make('email')
                     ->label('Email'),
                 Tables\Columns\TextColumn::make('created_at')
@@ -104,11 +104,11 @@ class ClienteResource extends Resource
                 Tables\Actions\DeleteBulkAction::make(),
             ]);
     }
-    
+
     public static function getPages(): array
     {
         return [
             'index' => Pages\ManageClientes::route('/'),
         ];
-    }    
+    }
 }

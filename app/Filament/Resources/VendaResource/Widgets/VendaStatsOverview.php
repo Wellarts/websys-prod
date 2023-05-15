@@ -13,14 +13,16 @@ class VendaStatsOverview extends BaseWidget
     protected function getCards(): array
     {
 
+        $ano = date('y');
         $mes = date('m');
         $dia = date('d');
+      //  dd($mes);
         return [
             Card::make('Total de Vendas', Venda::all()->sum('valor_total'))
                 ->description('Todo Perído')
                 ->descriptionIcon('heroicon-s-trending-up')
                 ->color('success'),
-            Card::make('Total de Vendas', DB::table('vendas')->whereMonth('data_venda', $mes)->sum('valor_total'))
+            Card::make('Total de Vendas', DB::table('vendas')->whereYear('data_venda', $ano)->whereMonth('data_venda', $mes)->sum('valor_total'))
                 ->description('Este mês')
                 ->descriptionIcon('heroicon-s-trending-up')
                 ->color('success'),

@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources;
 
+use AlperenErsoy\FilamentExport\Actions\FilamentExportBulkAction;
 use App\Filament\Resources\ProdutoResource\Pages;
 use App\Filament\Resources\ProdutoResource\RelationManagers;
 use App\Filament\Resources\ProdutoResource\RelationManagers\ProdutoFornecedorRelationManager;
@@ -15,6 +16,7 @@ use Filament\Resources\Table;
 use Filament\Tables;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+
 
 class ProdutoResource extends Resource
 {
@@ -58,7 +60,8 @@ class ProdutoResource extends Resource
                 Tables\Columns\TextColumn::make('nome')
                     ->sortable()
                     ->searchable(),
-                Tables\Columns\TextColumn::make('estoque'),
+                Tables\Columns\TextColumn::make('estoque')
+                    ->sortable(),
                 Tables\Columns\TextColumn::make('valor_compra')
                     ->money('BRL'),
                 Tables\Columns\TextColumn::make('lucratividade')
@@ -78,23 +81,26 @@ class ProdutoResource extends Resource
             ])
             ->bulkActions([
                 Tables\Actions\DeleteBulkAction::make(),
+                FilamentExportBulkAction::make('export')
+
+
             ]);
     }
-    
+
     public static function getRelations(): array
     {
         return [
             ProdutoFornecedorRelationManager::class
         ];
     }
-    
+
     public static function getPages(): array
     {
         return [
             'index' => Pages\ListProdutos::route('/'),
             'create' => Pages\CreateProduto::route('/create'),
             'edit' => Pages\EditProduto::route('/{record}/edit'),
-            
+
         ];
-    }    
+    }
 }
