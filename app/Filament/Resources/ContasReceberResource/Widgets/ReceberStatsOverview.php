@@ -12,11 +12,11 @@ class ReceberStatsOverview extends BaseWidget
 
     public $filters = null;
 
-    
+
 
     protected function getCards(): array
     {
-
+        $ano = date('Y');
         $mes = date('m');
         $dia = date('d');
 
@@ -25,11 +25,11 @@ class ReceberStatsOverview extends BaseWidget
             ->description('Todo Perído')
             ->descriptionIcon('heroicon-s-trending-up')
             ->color('success'),
-        Card::make('Total a Receber', DB::table('contas_recebers')->where('status', 0)->whereMonth('data_vencimento', $mes)->sum('valor_parcela'))
+        Card::make('Total a Receber', DB::table('contas_recebers')->where('status', 0)->whereYear('data_vencimento', $ano)->whereMonth('data_vencimento', $mes)->sum('valor_parcela'))
             ->description('Este mês')
             ->descriptionIcon('heroicon-s-trending-up')
             ->color('success'),
-        Card::make('Total a Receber', DB::table('contas_recebers')->where('status', 0)->whereDay('data_vencimento', $dia)->sum('valor_parcela'))
+        Card::make('Total a Receber', DB::table('contas_recebers')->where('status', 0)->whereYear('data_vencimento', $ano)->whereMonth('data_vencimento', $mes)->whereDay('data_vencimento', $dia)->sum('valor_parcela'))
             ->description('Hoje')
             ->descriptionIcon('heroicon-s-trending-up')
             ->color('success'),

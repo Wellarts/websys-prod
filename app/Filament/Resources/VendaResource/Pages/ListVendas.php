@@ -24,7 +24,7 @@ class ListVendas extends ListRecords
     protected function getHeaderWidgets(): array
     {
         return [
-         //   VendaStatsOverview::class
+            VendaStatsOverview::class
 
         ];
     }
