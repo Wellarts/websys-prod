@@ -41,5 +41,15 @@ class ListVendas extends ListRecords
         }
     }
 
+    protected function getDefaultTableSortColumn(): ?string
+    {
+        return 'data_venda';
+    }
+
+    protected function getDefaultTableSortDirection(): ?string
+    {
+        return 'desc';
+    }
+
 
 }
