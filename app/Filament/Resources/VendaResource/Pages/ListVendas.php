@@ -43,7 +43,7 @@ class ListVendas extends ListRecords
 
     protected function getDefaultTableSortColumn(): ?string
     {
-        return 'data_venda';
+        return 'id';
     }
 
     protected function getDefaultTableSortDirection(): ?string
