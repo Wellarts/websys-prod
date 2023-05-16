@@ -24,10 +24,24 @@ class ManageContasRecebers extends ManageRecords
 
     protected function getHeaderWidgets(): array
     {
-        return [
+
+        /** @var \App\Models\User */
+        $authUser =  auth()->user();
+
+        if($authUser->hasRole('Administrador'))
+        {
+           return [
             ReceberStatsOverview::class,
-         //   VendasMesChart::class,
-        ];
+
+           ];
+        }
+        else
+        {
+           return [
+
+           ];
+        }
+
     }
 
      protected function getFooter(): View
