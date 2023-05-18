@@ -21,11 +21,11 @@ class ReceberHojeStatsOverview extends BaseWidget
 
         return [
 
-         Card::make('Total a Receber', number_format(DB::table('contas_recebers')->where('status', 0)->whereYear('data_vencimento', $ano)->whereMonth('data_vencimento', $mes)->sum('valor_parcela'),2))
+         Card::make('Total a Receber', number_format(DB::table('contas_recebers')->where('status', 0)->whereYear('data_vencimento', $ano)->whereMonth('data_vencimento', $mes)->sum('valor_parcela'),2, ",", "."))
             ->description('Este mês')
             ->descriptionIcon('heroicon-s-trending-up')
             ->color('success'),
-        Card::make('Total a Receber', number_format(DB::table('contas_recebers')->where('status', 0)->whereYear('data_vencimento', $ano)->whereMonth('data_vencimento', $mes)->whereDay('data_vencimento', $dia)->sum('valor_parcela'),2))
+        Card::make('Total a Receber', number_format(DB::table('contas_recebers')->where('status', 0)->whereYear('data_vencimento', $ano)->whereMonth('data_vencimento', $mes)->whereDay('data_vencimento', $dia)->sum('valor_parcela'),2, ",", "."))
             ->description('Hoje')
             ->descriptionIcon('heroicon-s-trending-up')
             ->color('success'),

@@ -13,15 +13,15 @@ class CaixaStatsOverview extends BaseWidget
 
 
         return [
-             Card::make('Saldo', number_format(FluxoCaixa::all()->sum('valor'),2))
+             Card::make('Saldo', number_format(FluxoCaixa::all()->sum('valor'),2, ",", "."))
                 ->description('Valor atual')
                 ->descriptionIcon('heroicon-s-trending-up')
                 ->color('primary'),
-             Card::make('Débitos', number_format(FluxoCaixa::all()->where('valor', '<', 0)->sum('valor'),2))
+             Card::make('Débitos', number_format(FluxoCaixa::all()->where('valor', '<', 0)->sum('valor'),2, ",", "."))
                 ->description('Valor atual')
                 ->descriptionIcon('heroicon-s-trending-up')
                 ->color('danger'),
-            Card::make('Crétidos', number_format(FluxoCaixa::all()->where('valor', '>', 0)->sum('valor'),2))
+            Card::make('Crétidos', number_format(FluxoCaixa::all()->where('valor', '>', 0)->sum('valor'),2, ",", "."))
                 ->description('Valor atual')
                 ->descriptionIcon('heroicon-s-trending-up')
                 ->color('success'),

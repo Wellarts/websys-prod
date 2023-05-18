@@ -27,7 +27,7 @@ class TotalVendaStatsOverview extends BaseWidget
                 ->description('total')
                 ->descriptionIcon('heroicon-s-trending-up')
                 ->color('success'),
-            Card::make('Valor Total da Venda', number_format(Venda::all()->where('id', $this->record->id)->sum('valor_total'),2))
+            Card::make('Valor Total da Venda', number_format(Venda::all()->where('id', $this->record->id)->sum('valor_total'),2, ",", "."))
                 ->description('Itens da Venda')
                 ->descriptionIcon('heroicon-s-trending-up')
                 ->color('success'),
