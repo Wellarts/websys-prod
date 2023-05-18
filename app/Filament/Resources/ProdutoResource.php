@@ -48,7 +48,7 @@ class ProdutoResource extends Resource
                                 $set('valor_venda', ((($get('valor_compra') * $get('lucratividade'))/100) + $get('valor_compra')));
                             }),
                         Forms\Components\TextInput::make('valor_venda')
-                            ->disabled(),
+                           // ->disabled(),
                 ])->columns(2),
             ]);
     }
