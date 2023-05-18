@@ -14,8 +14,12 @@ class StatsEstoqueContabil extends BaseWidget
             Card::make('Total de Compra', number_format(Produto::all()->sum('total_compra'),2))
                 ->description('Estoque atual')
                 ->descriptionIcon('heroicon-s-trending-up')
-                ->color('success'),
+                ->color('danger'),
             Card::make('Total de Vendas', number_format(Produto::all()->sum('total_venda'),2))
+                ->description('Estoque atual')
+                ->descriptionIcon('heroicon-s-trending-up')
+                ->color('warning'),
+            Card::make('Total Lucro', number_format(Produto::all()->sum('total_venda') - Produto::all()->sum('total_compra'),2))
                 ->description('Estoque atual')
                 ->descriptionIcon('heroicon-s-trending-up')
                 ->color('success'),
