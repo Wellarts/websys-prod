@@ -3,6 +3,7 @@
 namespace App\Filament\Pages;
 
 use App\Filament\Resources\ProdutoResource;
+use App\Filament\Widgets\StatsEstoqueContabil;
 use App\Models\Produto;
 use Filament\Resources\Pages\Page;
 use Filament\Tables;
@@ -96,6 +97,14 @@ class EstoqueContabil extends Page  implements HasTable
                     ->color('success')
                     ->money('BRL'),
 
+
+        ];
+    }
+
+    protected function getHeaderWidgets(): array
+    {
+        return [
+            StatsEstoqueContabil::class,
 
         ];
     }

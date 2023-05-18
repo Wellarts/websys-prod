@@ -11,20 +11,20 @@ class CaixaStatsOverview extends BaseWidget
     protected function getCards(): array
     {
 
-       
+
         return [
-             Card::make('Saldo', FluxoCaixa::all()->sum('valor'))
+             Card::make('Saldo', number_format(FluxoCaixa::all()->sum('valor'),2))
                 ->description('Valor atual')
                 ->descriptionIcon('heroicon-s-trending-up')
                 ->color('primary'),
-             Card::make('Débitos', FluxoCaixa::all()->where('valor', '<', 0)->sum('valor'))
+             Card::make('Débitos', number_format(FluxoCaixa::all()->where('valor', '<', 0)->sum('valor'),2))
                 ->description('Valor atual')
                 ->descriptionIcon('heroicon-s-trending-up')
                 ->color('danger'),
-            Card::make('Crétidos', FluxoCaixa::all()->where('valor', '>', 0)->sum('valor'))
+            Card::make('Crétidos', number_format(FluxoCaixa::all()->where('valor', '>', 0)->sum('valor'),2))
                 ->description('Valor atual')
                 ->descriptionIcon('heroicon-s-trending-up')
-                ->color('success'),   
+                ->color('success'),
          //   Card::make('Total de Vendas do Mês', DB::table('vendas')->whereDay('data_venda', $dia)->sum('valor_total'))
         ];
     }

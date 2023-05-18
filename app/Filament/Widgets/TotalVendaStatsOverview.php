@@ -23,11 +23,11 @@ class TotalVendaStatsOverview extends BaseWidget
         $mes = date('m');
         $dia = date('d');
         return [
-            Card::make('Quantidade de Itens', DB::table('itens_vendas')->where('venda_id', $this->record->id)->sum('qtd'))
+            Card::make('Quantidade de Itens',DB::table('itens_vendas')->where('venda_id', $this->record->id)->sum('qtd'))
                 ->description('total')
                 ->descriptionIcon('heroicon-s-trending-up')
                 ->color('success'),
-            Card::make('Valor Total da Venda', Venda::all()->where('id', $this->record->id)->sum('valor_total'))
+            Card::make('Valor Total da Venda', number_format(Venda::all()->where('id', $this->record->id)->sum('valor_total'),2))
                 ->description('Itens da Venda')
                 ->descriptionIcon('heroicon-s-trending-up')
                 ->color('success'),
