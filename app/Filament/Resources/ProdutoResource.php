@@ -49,6 +49,10 @@ class ProdutoResource extends Resource
                             }),
                         Forms\Components\TextInput::make('valor_venda')
                            // ->disabled(),
+                           ->reactive()
+                           ->afterStateUpdated(function (Closure $get, Closure $set) {
+                            $set('lucratividade', (((($get('valor_venda') - $get('valor_compra')) / $get('valor_compra')) * 100)));
+                        }),
                 ])->columns(2),
             ]);
     }
