@@ -39,19 +39,19 @@ class ProdutoResource extends Resource
                         Forms\Components\TextInput::make('valor_compra')
                             ->reactive()
                             ->afterStateUpdated(function (Closure $get, Closure $set) {
-                                $set('valor_venda', ((($get('valor_compra') * $get('lucratividade'))/100) + $get('valor_compra')));
+                                $set('valor_venda', ((((float)$get('valor_compra') * (float)$get('lucratividade'))/100) + (float)$get('valor_compra')));
                             }),
                         Forms\Components\TextInput::make('lucratividade')
                            // ->required()
                             ->reactive()
                             ->afterStateUpdated(function (Closure $get, Closure $set) {
-                                $set('valor_venda', ((($get('valor_compra') * $get('lucratividade'))/100) + $get('valor_compra')));
+                                $set('valor_venda', ((((float)$get('valor_compra') * (float)$get('lucratividade'))/100) + (float)$get('valor_compra')));
                             }),
                         Forms\Components\TextInput::make('valor_venda')
                            // ->disabled(),
                            ->reactive()
                            ->afterStateUpdated(function (Closure $get, Closure $set) {
-                            $set('lucratividade', (((($get('valor_venda') - $get('valor_compra')) / $get('valor_compra')) * 100)));
+                            $set('lucratividade', (((((float)$get('valor_venda') - (float)$get('valor_compra')) / (float)$get('valor_compra')) * 100)));
                         }),
                 ])->columns(2),
             ]);
