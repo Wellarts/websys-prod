@@ -3,6 +3,7 @@
 namespace App\Filament\Pages;
 
 use App\Filament\Resources\ProdutoResource;
+use App\Filament\Widgets\StatsEstoqueContabil;
 use App\Models\Produto;
 use Filament\Resources\Pages\Page;
 use Filament\Tables;
@@ -32,7 +33,7 @@ class EstoqueContabil extends Page  implements HasTable
 
     protected static ?string $title = 'Estoque Contábil';
 
-    
+
 
 
     protected static function shouldRegisterNavigation(): bool
@@ -100,9 +101,13 @@ class EstoqueContabil extends Page  implements HasTable
         ];
     }
 
+    protected function getHeaderWidgets(): array
+    {
+        return [
+            StatsEstoqueContabil::class,
 
-
-
+        ];
+    }
 
     protected function getFooter(): View
     {

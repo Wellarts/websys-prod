@@ -21,6 +21,6 @@ class ProdutoFornecedor extends Model
 
     public function compra() {
 
-        return $this->belongsTo(compra::class);
+        return $this->belongsTo(Compra::class);
     }
 }

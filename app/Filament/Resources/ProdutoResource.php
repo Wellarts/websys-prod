@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources;
 
+use AlperenErsoy\FilamentExport\Actions\FilamentExportBulkAction;
 use App\Filament\Resources\ProdutoResource\Pages;
 use App\Filament\Resources\ProdutoResource\RelationManagers;
 use App\Filament\Resources\ProdutoResource\RelationManagers\ProdutoFornecedorRelationManager;
@@ -15,6 +16,7 @@ use Filament\Resources\Table;
 use Filament\Tables;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+
 
 class ProdutoResource extends Resource
 {
@@ -37,16 +39,20 @@ class ProdutoResource extends Resource
                         Forms\Components\TextInput::make('valor_compra')
                             ->reactive()
                             ->afterStateUpdated(function (Closure $get, Closure $set) {
-                                $set('valor_venda', ((($get('valor_compra') * $get('lucratividade'))/100) + $get('valor_compra')));
+                                $set('valor_venda', ((((float)$get('valor_compra') * (float)$get('lucratividade'))/100) + (float)$get('valor_compra')));
                             }),
                         Forms\Components\TextInput::make('lucratividade')
-                            ->required()
+                           // ->required()
                             ->reactive()
                             ->afterStateUpdated(function (Closure $get, Closure $set) {
-                                $set('valor_venda', ((($get('valor_compra') * $get('lucratividade'))/100) + $get('valor_compra')));
+                                $set('valor_venda', ((((float)$get('valor_compra') * (float)$get('lucratividade'))/100) + (float)$get('valor_compra')));
                             }),
                         Forms\Components\TextInput::make('valor_venda')
-                            ->disabled(),
+                           // ->disabled(),
+                           ->reactive()
+                           ->afterStateUpdated(function (Closure $get, Closure $set) {
+                            $set('lucratividade', (((((float)$get('valor_venda') - (float)$get('valor_compra')) / (float)$get('valor_compra')) * 100)));
+                        }),
                 ])->columns(2),
             ]);
     }
@@ -58,7 +64,8 @@ class ProdutoResource extends Resource
                 Tables\Columns\TextColumn::make('nome')
                     ->sortable()
                     ->searchable(),
-                Tables\Columns\TextColumn::make('estoque'),
+                Tables\Columns\TextColumn::make('estoque')
+                    ->sortable(),
                 Tables\Columns\TextColumn::make('valor_compra')
                     ->money('BRL'),
                 Tables\Columns\TextColumn::make('lucratividade')
@@ -78,23 +85,26 @@ class ProdutoResource extends Resource
             ])
             ->bulkActions([
                 Tables\Actions\DeleteBulkAction::make(),
+                FilamentExportBulkAction::make('export')
+
+
             ]);
     }
-    
+
     public static function getRelations(): array
     {
         return [
             ProdutoFornecedorRelationManager::class
         ];
     }
-    
+
     public static function getPages(): array
     {
         return [
             'index' => Pages\ListProdutos::route('/'),
             'create' => Pages\CreateProduto::route('/create'),
             'edit' => Pages\EditProduto::route('/{record}/edit'),
-            
+
         ];
-    }    
+    }
 }

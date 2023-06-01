@@ -19,11 +19,11 @@ class TotalCompraStatsOverview extends BaseWidget
         $mes = date('m');
         $dia = date('d');
         return [
-            Card::make('Quantidade de Itens', DB::table('itens_compras')->where('compra_id', $this->record->id)->sum('qtd'))
+            Card::make('Quantidade de Itens', number_format(DB::table('itens_compras')->where('compra_id', $this->record->id)->sum('qtd'),2, ",", "."))
                 ->description('total')
                 ->descriptionIcon('heroicon-s-trending-up')
                 ->color('success'),
-            Card::make('Valor Total da Compra', Compra::all()->where('id', $this->record->id)->sum('valor_total'))
+            Card::make('Valor Total da Compra', number_format(Compra::all()->where('id', $this->record->id)->sum('valor_total'),2, ",", "."))
                 ->description('Itens da Venda')
                 ->descriptionIcon('heroicon-s-trending-up')
                 ->color('success'),

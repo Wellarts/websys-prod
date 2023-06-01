@@ -30,7 +30,7 @@
                         <td>{{$vendas->data_venda}}</td>
                         <td>{{$vendas->formaPgmto->nome}}</td>
                         <td><label>R$</label> {{$vendas->valor_total}}</td>
-                   
+
                     <tr>
                     <td colspan="5">
                         <table class="table table-bordered">
@@ -43,29 +43,29 @@
                                         <td><b>SubTotal</b></td>
                                     </thead>
                                 </tr>
-                            <tr>                 
+                            <tr>
                                     <tbody align="center">
                                         @foreach ($vendas->itensVenda as $itens)
-                                            <tr> 
+                                            <tr>
                                                     <td>{{$itens->produto->nome}}</td>
                                                     <td><label>R$</label> {{$itens->valor_venda}}</td>
                                                     <td>{{$itens->qtd}}</td>
-                                                    <td><label>R$</label> {{$itens->desc_acres}}</td>
+                                                    <td><label>R$</label> {{$itens->acres_desc}}</td>
                                                     <td><label>R$</label> {{$itens->sub_total}}</td>
                                             </tr>
                                         @endforeach
-                                    </tbody>    
-                            </tr>    
-                                
+                                    </tbody>
+                            </tr>
+
                             </table>
                         </td>
                     </tr>
-                       
+
                 </tbody>
             </table>
-    </div> 
-       
-    
+    </div>
+
+
 </body>
 </html>
 
