@@ -11,29 +11,34 @@
     <title>Comprovante de Venda</title>
 </head>
 <body>
-<div class="container-sm">
-    <h2>Comprovante de venda</h2>
-</div>
 
-    <div class="container-sm">
-                <table class="table table-hover">
+    <div class="mx-8">
+        <p style="font-size:150%" align="center"><b>Nome da Empresa</b><p>
+        <p style="font-size:130%" align="center">Telefone:  (00)00000-0000</p>
+        <p style="font-size:130%" align="center">Comprovante de Venda</p>
+    </div>
+
+   
+<div style="font-size:80%">
+    <div class="mx-8" >
+                <table class="table">
                     <thead align="center">
                         <td><b>Venda</b></td>
                         <td><b>Cliente</b></td>
                         <td><b>Data</b></td>
                         <td><b>Forma de Pagamento</b></td>
-                        <td><b>Valor Total</b></td>
+                      <!--  <td><b>Valor Total</b></td> -->
                     </thead>
                     <tbody align="center">
                         <td>{{$vendas->id}}</td>
                         <td>{{$vendas->cliente->nome}}</td>
                         <td>{{$vendas->data_venda}}</td>
                         <td>{{$vendas->formaPgmto->nome}}</td>
-                        <td><label>R$</label> {{$vendas->valor_total}}</td>
+                    <!--    <td><label>R$</label> {{$vendas->valor_total}}</td> -->
 
                     <tr>
                     <td colspan="5">
-                        <table class="table table-bordered">
+                        <table class="table">
                             <tr>
                                     <thead align="center">
                                         <td><b>Produto</b></td>
@@ -55,15 +60,33 @@
                                             </tr>
                                         @endforeach
                                     </tbody>
+                                   
+                                   
                             </tr>
 
-                            </table>
-                        </td>
-                    </tr>
+                                                       
+
+                        </table>
+                    </td>
+                </tr>
+               
 
                 </tbody>
             </table>
+            <div>
+                <p style="text-align:right; font-size:150%;">VALOR TOTAL: R$ {{$vendas->valor_total}}</p>
+             </div>
+
+            <div  align="center">
+                <br><br><br>
+                <tr>_________________________________________________________</tr><br>
+                            <tr><label>Cliente</label></tr>
+            </div>
     </div>
+</div>
+
+
+  
 
 
 </body>

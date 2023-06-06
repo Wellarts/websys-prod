@@ -62,7 +62,7 @@ class ItensVendaRelationManager extends RelationManager
                     ->required()
                     ->reactive()
                     ->afterStateUpdated(function ($state, callable $set, Closure $get,) {
-                           $set('sub_total', (($get('qtd') * $get('valor_venda')) + (float)$get('acres_desc')));
+                           $set('sub_total', (((float)$get('qtd') * (float)$get('valor_venda')) + (float)$get('acres_desc')));
                            $set('total_custo_atual', $get('valor_custo_atual') * $get('qtd'));
                                 
                     }
@@ -74,7 +74,7 @@ class ItensVendaRelationManager extends RelationManager
                     ->label('Desconto/Acréscimo')
                     ->reactive()
                     ->afterStateUpdated(function (Closure $get, Closure $set) {
-                        $set('sub_total', (($get('qtd') * $get('valor_venda')) + (float)$get('acres_desc')));
+                        $set('sub_total', (((float)$get('qtd') * (float)$get('valor_venda')) + (float)$get('acres_desc')));
                     }),
                 Forms\Components\TextInput::make('sub_total')
                     ->disabled()
