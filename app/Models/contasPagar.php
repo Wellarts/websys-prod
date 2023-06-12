@@ -21,6 +21,7 @@ class contasPagar extends Model
         'valor_parcela',
         'valor_pago',
         'obs'
+        
     ];
 
     public function compra()
