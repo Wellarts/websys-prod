@@ -54,6 +54,7 @@ class UsersResource extends Resource
     {
         return $table
             ->columns([
+                TextColumn::make('id'),
                 TextColumn::make('name')
                     ->sortable()
                     ->searchable(),
