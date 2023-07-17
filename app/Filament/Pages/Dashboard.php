@@ -29,7 +29,8 @@ class Dashboard extends Page
             ->body('Sua mensalidade está atrasada, regularize sua assinatura para evitar o bloqueio do sistema.')
             ->actions([ 
                 Action::make('Entendi')
-                    ->button(),
+                    ->button()
+                    ->close(),
                 ]) 
             ->send();
     }
