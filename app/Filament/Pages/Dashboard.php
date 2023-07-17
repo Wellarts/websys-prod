@@ -7,6 +7,8 @@ use App\Filament\Resources\VendaResource\Widgets\VendasMesChart;
 use App\Filament\Widgets\PagarHojeStatsOverview;
 use App\Filament\Widgets\ReceberHojeStatsOverview;
 use App\Models\User;
+use Filament\Notifications\Actions\Action;
+use Filament\Notifications\Notification;
 use Filament\Pages\Page;
 use Filament\Widgets\AccountWidget;
 use Illuminate\Support\Facades\Auth;
@@ -17,6 +19,20 @@ class Dashboard extends Page
     protected static ?string $navigationIcon = 'heroicon-o-document-text';
 
     protected static string $view = 'filament.pages.dashboard';
+
+
+    public function mount() {
+        Notification::make()
+            ->title('ATENÇÃO')
+            ->persistent()
+            ->danger()
+            ->body('Sua mensalidade está atrasada, regularize sua assinatura para evitar o bloqueio do sistema.')
+            ->actions([ 
+                Action::make('Entendi')
+                    ->button(),
+                ]) 
+            ->send();
+    }
 
 
 
