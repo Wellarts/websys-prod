@@ -21,7 +21,7 @@ class Dashboard extends Page
     protected static string $view = 'filament.pages.dashboard';
 
 
-    public function mount() {
+  /*  public function mount() {
         Notification::make()
             ->title('ATENÇÃO')
             ->persistent()
@@ -33,7 +33,7 @@ class Dashboard extends Page
                     ->close(),
                 ]) 
             ->send();
-    }
+    } */
 
 
 
