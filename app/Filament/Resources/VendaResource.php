@@ -13,6 +13,7 @@ use App\Models\ItensVenda;
 use App\Models\Venda;
 use Filament\Forms;
 use Filament\Forms\Components\Card;
+use Filament\Forms\Components\Grid;
 use Filament\Resources\Form;
 use Filament\Resources\Resource;
 use Filament\Resources\Table;
@@ -35,7 +36,9 @@ class VendaResource extends Resource
         return $form
             ->schema([
                 Card::make()->schema([
-                        Forms\Components\Select::make('cliente_id')
+                    Grid::make()
+                        ->schema([
+                            Forms\Components\Select::make('cliente_id')
                             ->label('Cliente')
                             ->options(Cliente::all()->pluck('nome', 'id')->toArray())
                             ->required(),
@@ -52,9 +55,12 @@ class VendaResource extends Resource
                             ->options(FormaPgmto::all()->pluck('nome', 'id')->toArray())
                             ->required(),
                         Forms\Components\Textarea::make('obs')
+                            ->columnSpanFull()
                             ->label('Observações'),
+                        ])
+                        
 
-                ])->columns('2')
+                ])
 
             ]);
     }
