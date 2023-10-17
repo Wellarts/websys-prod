@@ -51,6 +51,7 @@ class ItensCompraRelationManager extends RelationManager
                     }
                 ),
                 Forms\Components\TextInput::make('valor_compra')
+                    ->label('Valor Compra')
                     ->reactive()
                     ->required()
                     ->afterStateUpdated(function (Closure $get, Closure $set) {
